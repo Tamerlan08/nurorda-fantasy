@@ -11,7 +11,7 @@ if (Meteor.isServer) {
     return Stores.find({
       $or: [
         { private: { $ne: true } },
-        { owner: this.userId },
+        { owner: this.userId }, 
       ],
     });
   });
@@ -45,7 +45,7 @@ Meteor.methods({
     user.defaultMoney = user.defaultMoney - store.studentPrice,
     Stores.update(storeId, { $set: {studentPrice: store.studentPrice} });
     Meteor.users.update(userId, { $set: {defaultMoney: user.defaultMoney} });
-    console.log("Balance available:",user.defaultMoney) 
+    console.log("Balance available:",user.defaultMoney)
     console.log("==================")
   },
 

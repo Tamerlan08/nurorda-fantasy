@@ -25,7 +25,7 @@ import Students from '../../pages/teamList/studentInput.js';
 import Store from '../../pages/teamList/storeInput.js';
 
 import TeamsPublic from '../../pages/teamList/teamInputPublic.js';
-import MatchesPublic from '../../pages/teamList/matchInputPublic.js'; 
+import MatchesPublic from '../../pages/teamList/matchInputPublic.js';
 import StudentsPublic from '../../pages/teamList/studentInputPublic.js';
 import StorePublic from '../../pages/teamList/storeInputPublic.js';
 

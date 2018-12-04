@@ -217,7 +217,7 @@ class UserPage extends React.Component {
           We are happy to see you here at Nurorda Fantasy League App!
         </p>
         <p>
-          You have now {user.defaultMoney} millions fancoins to spend on transfers!
+          You have now 100 millions fancoins to spend on transfers!
           The season starts very soon, so hurry up to assemble your team!
         </p>
         <p>

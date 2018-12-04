@@ -178,7 +178,7 @@ class MatchInput extends Component {
                           </DropdownButton>
                         </ButtonGroup>
                         <p></p>
-                        <form>
+                        <form> 
                           <input className="input-TeamOne"
                             type="number"
                             ref="ScoredOne"
