@@ -4,17 +4,9 @@ import classnames from 'classnames';
 import { Button, Table } from 'react-bootstrap';
 import { Roles } from 'meteor/alanning:roles';
 import PropTypes from 'prop-types';
-import { Bert } from 'meteor/themeteorchef:bert';
-
 import { Stores } from '../../../api/stores.js';
-class Store extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      owned: false
-    }
-  };
+export default class MyTeamRender extends Component {
 
   deleteThisStore() {
     Meteor.call('stores.remove', this.props.store._id);
@@ -32,26 +24,12 @@ class Store extends Component {
     Meteor.call('stores.minus1M', this.props.store._id);
   }
   buyPlayer(){
-    if (this.props.user.defaultMoney >= this.props.store.studentPrice) {
-    Meteor.call('stores.transfer', this.props.store._id, this.props.user._id);
-    Bert.alert('Check player in your team!', 'success')
-    this.setState({owned: true});
-    } else {
-    Bert.alert('You dont have enough money! Try selling your players to buy this one.', 'danger')
-    }
+    Bert.alert('You already bought this player!','danger')
   }
 
   render() {
-    const style = this.state.owned ? {display: 'none'} : {};
-    // start
-    const showClassName = classnames({
-      checked: this.props.task.checked,
-      private: this.props.task.private,
-    });
-    // end
     return (
-            <div className="studentPrice-2ndDIV" style={style}>
-              <div className={showClassName}>
+            <div className="studentPrice-2ndDIV">
               <center>
                 <p>Players Name: <strong>{this.props.store.studentName}</strong></p>
                 <p>Players Price: <strong>{this.props.store.studentPrice}M</strong></p>
@@ -85,10 +63,7 @@ class Store extends Component {
                 </Button>
                 </p>
               </center>
-              </div>
             </div>
     );
   }
 }
-
-export default Store;
