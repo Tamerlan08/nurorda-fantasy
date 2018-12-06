@@ -11,7 +11,7 @@ if (Meteor.isServer) {
     return Stores.find({
       $or: [
         { private: { $ne: true } },
-        { owner: this.userId }, 
+        { owner: this.userId },
       ],
     });
   });
@@ -36,17 +36,21 @@ Meteor.methods({
     });
   },
   'stores.transfer'(storeId, userId) {
-    console.log("Store:",storeId)
-    console.log("User:",userId)
-    check(storeId , String)
+    check(storeId , String);
     check(userId, String);
     const store = Stores.findOne(storeId);
     const user = Meteor.users.findOne({ _id: userId });
-    user.defaultMoney = user.defaultMoney - store.studentPrice,
-    Stores.update(storeId, { $set: {studentPrice: store.studentPrice} });
-    Meteor.users.update(userId, { $set: {defaultMoney: user.defaultMoney} });
-    console.log("Balance available:",user.defaultMoney)
     console.log("==================")
+    console.log("Store:",storeId);
+    console.log("User:",userId);
+    console.log("Submitted by:",store.owner);
+    user.defaultMoney = user.defaultMoney - store.studentPrice,
+    store.owner = this.userId
+    Stores.update(storeId, { $set: {studentPrice: store.studentPrice} });
+    Stores.update(storeId, { $set: {owner: userId} });
+    Meteor.users.update(userId, { $set: {defaultMoney: user.defaultMoney} });
+    console.log("Owned by:",store.owner)
+    console.log("Balance available:",user.defaultMoney)
   },
 
   'stores.plus1M'(storeId) {

@@ -10,8 +10,8 @@ const StyledIndex = styled.div`
   color: #fff;
 
   img {
-    width: auto;
-    height: auto;
+    width: 100px;
+    height: 100px;
   }
 
   h1 {
@@ -37,6 +37,11 @@ const StyledIndex = styled.div`
     }
   }
 
+  .invis {
+    background: transparent;
+    border: none !important;
+    font-size:0;
+  }
 
   @media screen and (min-width: 768px) {
     padding: 30px;
@@ -67,6 +72,7 @@ const Index = () => (
       <Button href="https://nurorda.kz/">School page</Button>
       <Button href="https://goo.gl/forms/M14nQzVXHcDw3n7D2"><i className="fa fa-star" /> Leave a feedback!</Button>
     </div>
+    <p><Button href="https://youtu.be/psFzJv8g6jc" className="invis" type="button" >Click Me!</Button></p>
   </StyledIndex>
 );
 
