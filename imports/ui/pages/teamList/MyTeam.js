@@ -44,9 +44,11 @@ class MyTeam extends Component {
   render() {
     return (
       <div>
+        <div className="page-header clearfix">
+          <h4 className="pull-left">Players of my team</h4>
+        </div>
         <div className="StoreMain">
           <center>
-            <h1>Players of my team</h1>
             <h4>Balance available: <Badge>{this.props.user.defaultMoney}M</Badge></h4>
           </center>
           <p></p>

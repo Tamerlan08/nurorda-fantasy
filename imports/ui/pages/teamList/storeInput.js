@@ -85,32 +85,34 @@ class StoreInput extends Component {
             <Col md={12}>
               { this.props.currentUser ?
               <div className="StoreMain">
+                <div className="page-header clearfix">
+                  <h4 className="pull-left">Transfer Market</h4>
+                </div>
                 <center>
-                  <h1>Transfer Market</h1>
-                  <h4>Balance available: <Badge>{user.defaultMoney}M</Badge></h4>
-                    <div>
-                        <ButtonGroup justified className="StoreStudent">
-                          <DropdownButton className="dropdown-studentPrice"
-                            title={this.state.selectedOptionStudent}
-                            id="document-type"
-                            onSelect={this.handleSelectStudent.bind(this)}>
-                            {students.map((student, i) => (
-                              <MenuItem key={i} eventKey={i}>
-                                {student}
-                              </MenuItem>))}
-                          </DropdownButton>
-                        </ButtonGroup>
-                        <p></p>
-                        <form>
-                          <input className="input-studentPrice"
-                            type="number"
-                            min={0}
-                            ref="studentPrice"
-                            placeholder="Student Price"
-                            align="left"
-                          />
-                        </form>
-                    </div>
+                <h4>Balance available: <Badge>{user.defaultMoney}M</Badge></h4>
+              <div>
+              <ButtonGroup justified className="StoreStudent">
+                <DropdownButton className="dropdown-studentPrice"
+                  title={this.state.selectedOptionStudent}
+                  id="document-type"
+                  onSelect={this.handleSelectStudent.bind(this)}>
+                   {students.map((student, i) => (
+                   <MenuItem key={i} eventKey={i}>
+                     {student}
+                   </MenuItem>))}
+                </DropdownButton>
+              </ButtonGroup>
+              <p></p>
+              <form>
+                 <input className="input-studentPrice"
+                   type="number"
+                   min={0}
+                   ref="studentPrice"
+                   placeholder="Student Price"
+                   align="left"
+                   />
+              </form>
+              </div>
 
                     <p></p>
                     <Button bsStyle="warning" className="dropdown-submit-button" onClick={this.OnehandleSubmit.bind(this)}>Confirm & Submit</Button>

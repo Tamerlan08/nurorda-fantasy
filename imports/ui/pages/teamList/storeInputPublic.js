@@ -81,9 +81,11 @@ class StoreInputPublic extends Component {
 
     return (
       <div>
+        <div className="page-header clearfix">
+          <h4 className="pull-left">Transfer Market</h4>
+        </div>
         <div className="StoreMain">
           <center>
-            <h1>Transfer Market</h1>
             <h4>Balance available: <Badge>{user.defaultMoney}M</Badge></h4>
           </center>
           <p></p>
