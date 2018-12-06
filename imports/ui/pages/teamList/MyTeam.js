@@ -30,7 +30,6 @@ class MyTeam extends Component {
     return filteredStores.map((store) => {
       const currentUserId = this.props.currentUser && this.props.currentUser._id;
       const showPrivateButton = store.owner === currentUserId;
-
       return (
         <MyTeamRender
           key={store._id}

@@ -31,6 +31,10 @@ const AuthenticatedNavigation = ({ name, history, userId }) => (
       <LinkContainer to="/store">
         <NavItem eventKey={4} href="/store">Transfer Market</NavItem>
       </LinkContainer> : ''}
+      {!Roles.userIsInRole(userId, 'admin') ?
+      <LinkContainer to="/myteam">
+        <NavItem eventKey={8.2} href="/myteam">My Team</NavItem>
+      </LinkContainer>: ''}
       {Roles.userIsInRole(userId, 'admin') ?
       <LinkContainer to="/teams-admin">
         <NavItem eventKey={5.1} href="/teams-admin">Teams</NavItem>
@@ -46,6 +50,10 @@ const AuthenticatedNavigation = ({ name, history, userId }) => (
       {Roles.userIsInRole(userId, 'admin') ?
       <LinkContainer to="/store-admin">
         <NavItem eventKey={8.2} href="/store-admin">Transfer Market</NavItem>
+      </LinkContainer>: ''}
+      {Roles.userIsInRole(userId, 'admin') ?
+      <LinkContainer to="/myteam">
+        <NavItem eventKey={8.2} href="/myteam">My Team</NavItem>
       </LinkContainer>: ''}
     </Nav>
     <Nav pullRight>

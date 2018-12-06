@@ -33,25 +33,20 @@ class Store extends Component {
   }
   buyPlayer(){
     if (this.props.user.defaultMoney >= this.props.store.studentPrice) {
-    Meteor.call('stores.transfer', this.props.store._id, this.props.user._id);
+    Meteor.call('stores.transfer-buy', this.props.store._id, this.props.user._id);
     Bert.alert('Check player in your team!', 'success')
-    this.setState({owned: true});
     } else {
     Bert.alert('You dont have enough money! Try selling your players to buy this one.', 'danger')
     }
   }
+  sellPlayer(){
+    Bert.alert('Buy this player first!','danger')
+  }
 
   render() {
-    const style = this.state.owned ? {display: 'none'} : {};
-    // start
-    const showClassName = classnames({
-      checked: this.props.task.checked,
-      private: this.props.task.private,
-    });
-    // end
+    const style = this.props.store.owned ? {display: 'none'} : {};
     return (
             <div className="studentPrice-2ndDIV" style={style}>
-              <div className={showClassName}>
               <center>
                 <p>Players Name: <strong>{this.props.store.studentName}</strong></p>
                 <p>Players Price: <strong>{this.props.store.studentPrice}M</strong></p>
@@ -59,7 +54,7 @@ class Store extends Component {
                 <Button bsStyle="success" className="BuyButton" onClick={this.buyPlayer.bind(this)}>
                 Buy
                 </Button>
-                <Button bsStyle="danger" className="SellButton">
+                <Button bsStyle="danger" className="SellButton" onClick={this.sellPlayer.bind(this)}>
                 Sell
                 </Button>
                 </p>
@@ -85,7 +80,6 @@ class Store extends Component {
                 </Button>
                 </p>
               </center>
-              </div>
             </div>
     );
   }

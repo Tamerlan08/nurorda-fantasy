@@ -26,10 +26,15 @@ export default class MyTeamRender extends Component {
   buyPlayer(){
     Bert.alert('You already bought this player!','danger')
   }
+  sellPlayer(){
+    Meteor.call('stores.transfer-sell', this.props.store._id, this.props.user._id);
+    Bert.alert('Player sold!', 'success')
+  }
 
   render() {
+    const style = this.props.store.owned ? {} : {display: 'none'};
     return (
-            <div className="studentPrice-2ndDIV">
+            <div className="studentPrice-2ndDIV" style={style}>
               <center>
                 <p>Players Name: <strong>{this.props.store.studentName}</strong></p>
                 <p>Players Price: <strong>{this.props.store.studentPrice}M</strong></p>
@@ -37,7 +42,7 @@ export default class MyTeamRender extends Component {
                 <Button bsStyle="success" className="BuyButton" onClick={this.buyPlayer.bind(this)}>
                 Buy
                 </Button>
-                <Button bsStyle="danger" className="SellButton">
+                <Button bsStyle="danger" className="SellButton" onClick={this.sellPlayer.bind(this)}>
                 Sell
                 </Button>
                 </p>

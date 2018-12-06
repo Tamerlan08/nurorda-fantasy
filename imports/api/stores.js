@@ -33,20 +33,44 @@ Meteor.methods({
       createdAt: new Date(),
       owner: this.userId,
       username: Meteor.users.findOne(this.userId).username,
+      owned: false,
     });
   },
-  'stores.transfer'(storeId, userId) {
+  'stores.transfer-buy'(storeId, userId) {
     check(storeId , String);
     check(userId, String);
     const store = Stores.findOne(storeId);
     const user = Meteor.users.findOne({ _id: userId });
+    console.log("[+]Buy transaction")
     console.log("Store:",storeId);
     console.log("User:",userId);
     console.log("Submitted by:",store.owner);
     user.defaultMoney = user.defaultMoney - store.studentPrice,
     store.owner = this.userId
+    store.owned = true
     Stores.update(storeId, { $set: {studentPrice: store.studentPrice} });
     Stores.update(storeId, { $set: {owner: userId} });
+    Stores.update(storeId, { $set: {owned: true} });
+    Meteor.users.update(userId, { $set: {defaultMoney: user.defaultMoney} });
+    console.log("Owned by:",store.owner)
+    console.log("Balance available:",user.defaultMoney)
+    console.log("=====================================")
+  },
+  'stores.transfer-sell'(storeId, userId) {
+    check(storeId , String);
+    check(userId, String);
+    const store = Stores.findOne(storeId);
+    const user = Meteor.users.findOne({ _id: userId });
+    console.log("[-]Sell transaction");
+    console.log("Store:",storeId);
+    console.log("User:",userId);
+    console.log("Submitted by:",store.owner);
+    user.defaultMoney = user.defaultMoney + store.studentPrice,
+    store.owner = this.userId
+    store.owned = null
+    Stores.update(storeId, { $set: {studentPrice: store.studentPrice} });
+    Stores.update(storeId, { $set: {owner: store.owner} });
+    Stores.update(storeId, { $set: {owned: store.owned} });
     Meteor.users.update(userId, { $set: {defaultMoney: user.defaultMoney} });
     console.log("Owned by:",store.owner)
     console.log("Balance available:",user.defaultMoney)
