@@ -58,7 +58,7 @@ class Store extends Component {
                 Sell
                 </Button>
                 </p>
-                <hr></hr>
+                <hr></hr> 
                 <p>Options to Modify</p>
                 <p>
                 <Button bsStyle="danger" className="delete" onClick={this.deleteThisStore.bind(this)}>

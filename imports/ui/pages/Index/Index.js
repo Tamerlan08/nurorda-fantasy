@@ -10,16 +10,18 @@ const StyledIndex = styled.div`
   color: #fff;
 
   img {
-    width: auto;
-    height: auto;
+    width: 100px;
+    height: 100px;
   }
 
   h1 {
     font-size: 28px;
+    color: #ed3137;
   }
 
   p {
     font-size: 18px;
+    color: #1c5393;
   }
 
   > div {
@@ -35,6 +37,11 @@ const StyledIndex = styled.div`
     }
   }
 
+  .invis {
+    background: transparent;
+    border: none !important;
+    font-size:0;
+  }
 
   @media screen and (min-width: 768px) {
     padding: 30px;
@@ -63,8 +70,9 @@ const Index = () => (
     <p>Football fantasy of Nurorda.</p>
     <div>
       <Button href="https://nurorda.kz/">School page</Button>
-      <Button href="https://google.kz/"><i className="fa fa-star" />Leave a feedback!</Button>
+      <Button href="https://goo.gl/forms/M14nQzVXHcDw3n7D2"><i className="fa fa-star" /> Leave a feedback!</Button>
     </div>
+    <p><Button href="https://youtu.be/dQw4w9WgXcQ" className="invis" type="button" >Click Me!</Button></p>
   </StyledIndex>
 );
 

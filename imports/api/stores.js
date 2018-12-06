@@ -74,7 +74,6 @@ Meteor.methods({
     Meteor.users.update(userId, { $set: {defaultMoney: user.defaultMoney} });
     console.log("Owned by:",store.owner)
     console.log("Balance available:",user.defaultMoney)
-    console.log("=====================================")
   },
 
   'stores.plus1M'(storeId) {
