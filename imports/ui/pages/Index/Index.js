@@ -61,6 +61,7 @@ const StyledIndex = styled.div`
 `;
 
 console.log("205147926");
+Tengiz = "d1 86 d1 80 d0 b9 d0 be d0 b4 d1 81 20 d0 b4 d0 bc 20 d0 bb d0 b4 d0 bf d0 bf d1 80 d0 b9 20 d0 b4 d0 b9 20 d1 86 d0 bb d1 80 20 d0 bc d0 b4 d1 86 d1 80 20 d1 86 d0 b3 d0 b8 20 d1 86 d0 ba 20 d1 88 d0 b4 d0 b9 d0 bf 20 d0 bb d0 b4 d0 b7"
 const Index = () => (
   <StyledIndex>
     <img
