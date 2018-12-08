@@ -27,7 +27,7 @@ export default class MyTeamRender extends Component {
     Bert.alert('You already bought this player!','danger')
   }
   sellPlayer(){
-    Meteor.call('stores.transfer-sell', this.props.store._id, this.props.user._id);
+    Meteor.call('stores.transfer-testsell', this.props.store._id, this.props.user._id);
     Bert.alert('Player sold!', 'success')
   }
 

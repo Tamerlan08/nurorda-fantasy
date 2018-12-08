@@ -31,10 +31,101 @@ Meteor.methods({
       studentName,
       studentPrice: parseFloat(studentPrice),
       createdAt: new Date(),
-      owner: this.userId,
+      ownerfirst: false,
+      ownersecond: false,
+      ownerthird: false,
       username: Meteor.users.findOne(this.userId).username,
       owned: false,
+      alreadybought: 0,
     });
+  },
+  'stores.transfer-testbuy'(storeId, userId) {
+    check(storeId , String);
+    check(userId, String);
+    const store = Stores.findOne(storeId);
+    const user = Meteor.users.findOne({ _id: userId });
+    console.log("[?+]Testbuy transaction")
+    if(store.ownerfirst == this.userId || store.ownersecond == this.userId || store.ownerthird == this.userId){
+      console.log("Operation can not be done!")
+      console.log("Player is already in your team")
+      console.log("")
+    } else if(store.ownerfirst == false){
+      store.ownerfirst = this.userId
+      user.defaultMoney = user.defaultMoney - store.studentPrice
+      store.alreadybought = store.alreadybought + 1
+      console.log("Success!")
+    } else if(store.ownersecond == false){
+      store.ownersecond = this.userId
+      user.defaultMoney = user.defaultMoney - store.studentPrice
+      store.alreadybought = store.alreadybought + 1
+      console.log("Success!")
+    } else if(store.ownerthird == false){
+      store.ownerthird = this.userId
+      user.defaultMoney = user.defaultMoney - store.studentPrice
+      store.alreadybought = store.alreadybought + 1
+      console.log("Success!")
+    } else {
+      console.log("Operation can not be done!")
+      console.log("Player is not available in store")
+    }
+    console.log("First owner:",store.ownerfirst)
+    console.log("Second owner:",store.ownersecond)
+    console.log("Third owner:",store.ownerthird)
+    console.log("Your userId:",this.userId)
+    if(store.ownerfirst != false && store.ownersecond != false && store.ownerthird){
+      store.owned = true
+    } else {
+      store.owned = false
+    }
+    console.log("Owned(true/false):",store.owned)
+    Stores.update(storeId, { $set: {ownerfirst: store.ownerfirst} });
+    Stores.update(storeId, { $set: {ownersecond: store.ownersecond} });
+    Stores.update(storeId, { $set: {ownerthird: store.ownerthird} });
+    Stores.update(storeId, { $set: {owned: store.owned} });
+    Stores.update(storeId, { $set: {alreadybought: store.alreadybought} });
+    Meteor.users.update(userId, { $set: {defaultMoney: user.defaultMoney} });
+    console.log("=====================================")
+  },
+  'stores.transfer-testsell'(storeId, userId) {
+    check(storeId , String);
+    check(userId, String);
+    const store = Stores.findOne(storeId);
+    const user = Meteor.users.findOne({ _id: userId });
+    console.log("[?+]Testsell transaction")
+    if(this.userId == !(store.ownerfirst || store.ownersecond || store.ownerthird)){
+      console.log("Operation can not be done!")
+    } else if(store.ownerfirst == this.userId){
+      user.defaultMoney = user.defaultMoney + store.studentPrice
+      store.ownerfirst = Boolean(false)
+      store.alreadybought = store.alreadybought - 1
+    } else if(store.ownersecond == false){
+      user.defaultMoney = user.defaultMoney + store.studentPrice
+      store.ownersecond = Boolean(false)
+      store.alreadybought = store.alreadybought - 1
+    } else if(store.ownerthird == false){
+      user.defaultMoney = user.defaultMoney + store.studentPrice
+      store.ownerthird = Boolean(false)
+      store.alreadybought = store.alreadybought - 1
+    } else {
+      console.log("Operation can not be done!")
+    }
+    console.log("First owner:",store.ownerfirst)
+    console.log("Second owner:",store.ownersecond)
+    console.log("Third owner:",store.ownerthird)
+    console.log("Your userId:",this.userId)
+    if(store.ownerfirst != false && store.ownersecond != false && store.ownerthird){
+      store.owned == true
+    } else {
+      store.owned == false
+    }
+    console.log("Owned(true/false):",store.owned)
+    Stores.update(storeId, { $set: {ownerfirst: store.ownerfirst} });
+    Stores.update(storeId, { $set: {ownersecond: store.ownersecond} });
+    Stores.update(storeId, { $set: {ownerthird: store.ownerthird} });
+    Stores.update(storeId, { $set: {owned: store.owned} });
+    Stores.update(storeId, { $set: {alreadybought: store.alreadybought} });
+    Meteor.users.update(userId, { $set: {defaultMoney: user.defaultMoney} });
+    console.log("=====================================")
   },
   'stores.transfer-buy'(storeId, userId) {
     check(storeId , String);

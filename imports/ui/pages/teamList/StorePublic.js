@@ -12,14 +12,15 @@ export default class StorePublic extends Component {
 
   buyPlayer(){
     if (this.props.user.defaultMoney >= this.props.store.studentPrice) {
-    Meteor.call('stores.transfer-buy', this.props.store._id, this.props.user._id);
+    Meteor.call('stores.transfer-testbuy', this.props.store._id, this.props.user._id);
     Bert.alert('Check player in your team!', 'success')
     } else {
     Bert.alert('You dont have enough money! Try selling your players to buy this one.', 'danger')
     }
   }
   sellPlayer(){
-    Bert.alert('Buy this player first!','danger')
+    Meteor.call('stores.transfer-testsell', this.props.store._id, this.props.user._id);
+    Bert.alert('Player sold!', 'success')
   }
 
   render() {
@@ -37,6 +38,7 @@ export default class StorePublic extends Component {
                 Sell
                 </Button>
                 </p>
+                <p>Teams bought: {this.props.store.alreadybought}/3</p>
               </center>
             </div>
     );
