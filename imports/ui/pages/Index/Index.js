@@ -60,6 +60,7 @@ const StyledIndex = styled.div`
   }
 `;
 
+console.log("205147926");
 const Index = () => (
   <StyledIndex>
     <img
