@@ -13,14 +13,17 @@ export default class StorePublic extends Component {
   buyPlayer(){
     if (this.props.user.defaultMoney >= this.props.store.studentPrice) {
     Meteor.call('stores.transfer-testbuy', this.props.store._id, this.props.user._id);
-    Bert.alert('Check player in your team!', 'success')
+    event.preventDefault();
+    // Find the text field via the React ref
+    const studentPrice = this.props.store.studentPrice;
+    const studentName = this.props.store.studentName;
+    Meteor.call('players.insert', studentName, studentPrice);
     } else {
     Bert.alert('You dont have enough money! Try selling your players to buy this one.', 'danger')
     }
   }
   sellPlayer(){
-    Meteor.call('stores.transfer-testsell', this.props.store._id, this.props.user._id);
-    Bert.alert('Player sold!', 'success')
+    Bert.alert('You can not sell this player!', 'danger')
   }
 
   render() {

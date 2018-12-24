@@ -34,20 +34,23 @@ class Store extends Component {
   buyPlayer(){
     if (this.props.user.defaultMoney >= this.props.store.studentPrice) {
     Meteor.call('stores.transfer-testbuy', this.props.store._id, this.props.user._id);
-    Bert.alert('Check player in your team!', 'success')
+    event.preventDefault();
+    // Find the text field via the React ref
+    const studentid = this.props.store._id
+    const studentPrice = this.props.store.studentPrice;
+    const studentName = this.props.store.studentName;
+    Meteor.call('players.insert', studentid, studentName, studentPrice);
     } else {
     Bert.alert('You dont have enough money! Try selling your players to buy this one.', 'danger')
     }
   }
   sellPlayer(){
-    Meteor.call('stores.transfer-testsell', this.props.store._id, this.props.user._id);
-    Bert.alert('Player sold!', 'success')
+    Bert.alert('You can not sell this player!', 'danger')
   }
 
   render() {
-    const style = this.props.store.owned ? {display: 'none'} : {};
     return (
-            <div className="studentPrice-2ndDIV" style={style}>
+            <div className="studentPrice-2ndDIV">
               <center>
                 <p>Players Name: <strong>{this.props.store.studentName}</strong></p>
                 <p>Players Price: <strong>{this.props.store.studentPrice}M</strong></p>

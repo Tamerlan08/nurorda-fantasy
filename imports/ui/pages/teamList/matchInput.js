@@ -43,7 +43,7 @@ class MatchInput extends Component {
 
   OnehandleSubmit(event) {
     event.preventDefault();
-
+    
     // Find the text field via the React ref
     const scoredOne = ReactDOM.findDOMNode(this.refs.ScoredOne).value.trim();
     const scoredTwo = ReactDOM.findDOMNode(this.refs.ScoredTwo).value.trim();
@@ -178,7 +178,7 @@ class MatchInput extends Component {
                           </DropdownButton>
                         </ButtonGroup>
                         <p></p>
-                        <form> 
+                        <form>
                           <input className="input-TeamOne"
                             type="number"
                             ref="ScoredOne"

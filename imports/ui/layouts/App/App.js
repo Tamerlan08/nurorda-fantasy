@@ -28,7 +28,7 @@ import TeamsPublic from '../../pages/teamList/teamInputPublic.js';
 import MatchesPublic from '../../pages/teamList/matchInputPublic.js';
 import StudentsPublic from '../../pages/teamList/studentInputPublic.js';
 import StorePublic from '../../pages/teamList/storeInputPublic.js';
-import MyTeam from '../../pages/teamList/MyTeam.js'
+import MyTeam from '../../pages/teamList/playerInput.js'
 
 import NewDocument from '../../pages/NewDocument/NewDocument';
 import ViewDocument from '../../pages/ViewDocument/ViewDocument';
