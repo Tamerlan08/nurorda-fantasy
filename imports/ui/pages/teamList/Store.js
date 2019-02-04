@@ -32,6 +32,11 @@ class Store extends Component {
     Meteor.call('stores.minus1M', this.props.store._id);
   }
   buyPlayer(){
+    const playerid = this.props.players.map ((player) => player.studentid)
+    const storeid = this.props.store._id
+    if ( playerid.includes(storeid) ){
+      Bert.alert("Player is already in your team!", 'danger')
+    } else {
     if (this.props.user.defaultMoney >= this.props.store.studentPrice) {
     Meteor.call('stores.transfer-testbuy', this.props.store._id, this.props.user._id);
     event.preventDefault();
@@ -40,15 +45,20 @@ class Store extends Component {
     const studentPrice = this.props.store.studentPrice;
     const studentName = this.props.store.studentName;
     Meteor.call('players.insert', studentid, studentName, studentPrice);
+    Bert.alert("Check player in your team!", 'success')
     } else {
     Bert.alert('You dont have enough money! Try selling your players to buy this one.', 'danger')
     }
-  }
+  }}
   sellPlayer(){
     Bert.alert('You can not sell this player!', 'danger')
   }
+  function(){
+    const playerid = this.props.players.map ((player) => player.studentid)
+  }
 
   render() {
+    const playerid = this.props.players.map ((player) => player.studentid)
     return (
             <div className="studentPrice-2ndDIV">
               <center>
@@ -58,11 +68,10 @@ class Store extends Component {
                 <Button bsStyle="success" className="BuyButton" onClick={this.buyPlayer.bind(this)}>
                 Buy
                 </Button>
-                <Button bsStyle="danger" className="SellButton" onClick={this.sellPlayer.bind(this)}>
+                <Button bsStyle="danger" className="SellButton" onClick={this.sellPlayer.bind(this)} disabled>
                 Sell
                 </Button>
                 </p>
-                <p>Teams bought: {this.props.store.alreadybought}/3</p>
                 <hr></hr>
                 <p>Options to Modify</p>
                 <p>

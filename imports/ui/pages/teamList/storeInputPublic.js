@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Nav, Navbar, NavItem, NavDropdown, MenuItem, Table, DropdownButton, Badge } from 'react-bootstrap';
+import { Nav, Navbar, NavItem, NavDropdown, MenuItem, Table, DropdownButton, Badge, ButtonGroup } from 'react-bootstrap';
 import { Button , Grid, Row, Col, Clearfix} from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Navigation from '../../components/Navigation/Navigation';
@@ -11,11 +11,13 @@ import StudentInput from './studentInput.js'
 import { Students } from '../../../api/students.js';
 import Student from './Student.js';
 import { Stores } from '../../../api/stores.js';
-import Store from './StorePublic.js';
+import Store from './Store.js';
+import PlayerInput from './playerInput.js'
+import { Players } from '../../../api/players.js';
 import getUserProfile from '../../../modules/get-user-profile';
 
 
-class StoreInputPublic extends Component {
+class StoreInput extends Component {
   constructor(props) {
     super(props);
 
@@ -36,7 +38,6 @@ class StoreInputPublic extends Component {
     // Find the text field via the React ref
     const studentPrice = ReactDOM.findDOMNode(this.refs.studentPrice).value.trim();
     const studentName = this.state.selectedOptionStudent;
-
     Meteor.call('stores.insert', studentName, studentPrice);
 
     // Clear form
@@ -50,6 +51,7 @@ class StoreInputPublic extends Component {
   }
 
   renderStores() {
+    const playerid = this.props.players.map ((player) => player.studentid)
     let filteredStores = this.props.stores;
     if (this.state.hideCompleted) {
       filteredStores = filteredStores.filter(store => !Store.checked);
@@ -63,6 +65,8 @@ class StoreInputPublic extends Component {
           key={store._id}
           store={store}
           user={this.props.user}
+          player={this.props.player}
+          players={this.props.players}
           showPrivateButton={showPrivateButton}
         />
       );
@@ -76,25 +80,36 @@ class StoreInputPublic extends Component {
 
   render() {
     const students = this.props.students.map ((student) => student.name)
+    const playerid = this.props.players.map ((player) => player.studentid)
     const {selectedOption} = this.state;
     const { user } = this.props;
 
+
     return (
       <div>
-        <div className="page-header clearfix">
-          <h4 className="pull-left">Transfer Market</h4>
-        </div>
-        <div className="page-header clearfix">
-          <h4 className="pull-left">Balance available: <Badge>{user.defaultMoney}M</Badge></h4>
-        </div>
-        <p></p>
-        <div className="DIV-studentPrice">
-          {this.renderStores()}
-        </div>
+        <Grid>
+          <Row>
+            <Col md={12}>
+              { this.props.currentUser ?
+              <div className="StoreMain">
+                <center>
+                <h2>Transfer Market</h2>
+                <h4>Balance available: <Badge>{user.defaultMoney}M</Badge></h4>
+                </center>
+                <p></p>
+              </div> : '' }
+            <p></p>
+            <div className="DIV-studentPrice">
+              {this.renderStores()}
+            </div>
+          </Col>
+        </Row>
+      </Grid>
         <div className="hiddenContent">
-          <StudentInput />
+        <PlayerInput />
+        <StudentInput />
         </div>
-      </div>
+    </div>
     );
   }
 }
@@ -102,11 +117,13 @@ class StoreInputPublic extends Component {
 export default withTracker(() => {
   Meteor.subscribe('stores');
   Meteor.subscribe('students');
+  Meteor.subscribe('players');
   return {
     user: getUserProfile(Meteor.users.findOne({ _id: Meteor.userId() })),
     stores: Stores.find({}, { sort: { createdAt: -1 } }).fetch(),
     students: Students.find({}, { sort: { createdAt: -1 } }).fetch(),
+    players: Players.find({}, { sort: { createdAt: -1 } }).fetch(),
     currentUser: Meteor.user(),
   };
 
-})(StoreInputPublic);
+})(StoreInput);

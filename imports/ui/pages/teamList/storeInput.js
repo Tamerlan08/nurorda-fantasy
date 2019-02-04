@@ -12,6 +12,8 @@ import { Students } from '../../../api/students.js';
 import Student from './Student.js';
 import { Stores } from '../../../api/stores.js';
 import Store from './Store.js';
+import PlayerInput from './playerInput.js'
+import { Players } from '../../../api/players.js';
 import getUserProfile from '../../../modules/get-user-profile';
 
 
@@ -49,6 +51,7 @@ class StoreInput extends Component {
   }
 
   renderStores() {
+    const playerid = this.props.players.map ((player) => player.studentid)
     let filteredStores = this.props.stores;
     if (this.state.hideCompleted) {
       filteredStores = filteredStores.filter(store => !Store.checked);
@@ -62,6 +65,8 @@ class StoreInput extends Component {
           key={store._id}
           store={store}
           user={this.props.user}
+          player={this.props.player}
+          players={this.props.players}
           showPrivateButton={showPrivateButton}
         />
       );
@@ -75,8 +80,10 @@ class StoreInput extends Component {
 
   render() {
     const students = this.props.students.map ((student) => student.name)
+    const playerid = this.props.players.map ((player) => player.studentid)
     const {selectedOption} = this.state;
     const { user } = this.props;
+
 
     return (
       <div>
@@ -85,10 +92,8 @@ class StoreInput extends Component {
             <Col md={12}>
               { this.props.currentUser ?
               <div className="StoreMain">
-                <div className="page-header clearfix">
-                  <h4 className="pull-left">Transfer Market</h4>
-                </div>
                 <center>
+                <h2>Transfer Market</h2>
                 <h4>Balance available: <Badge>{user.defaultMoney}M</Badge></h4>
               <div>
               <ButtonGroup justified className="StoreStudent">
@@ -127,6 +132,7 @@ class StoreInput extends Component {
         </Row>
       </Grid>
         <div className="hiddenContent">
+        <PlayerInput />
         <StudentInput />
         </div>
     </div>
@@ -137,10 +143,12 @@ class StoreInput extends Component {
 export default withTracker(() => {
   Meteor.subscribe('stores');
   Meteor.subscribe('students');
+  Meteor.subscribe('players');
   return {
     user: getUserProfile(Meteor.users.findOne({ _id: Meteor.userId() })),
     stores: Stores.find({}, { sort: { createdAt: -1 } }).fetch(),
     students: Students.find({}, { sort: { createdAt: -1 } }).fetch(),
+    players: Players.find({}, { sort: { createdAt: -1 } }).fetch(),
     currentUser: Meteor.user(),
   };
 

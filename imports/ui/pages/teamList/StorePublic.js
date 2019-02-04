@@ -4,32 +4,63 @@ import classnames from 'classnames';
 import { Button, Table } from 'react-bootstrap';
 import { Roles } from 'meteor/alanning:roles';
 import PropTypes from 'prop-types';
-
+import { Bert } from 'meteor/themeteorchef:bert';
 
 import { Stores } from '../../../api/stores.js';
-export default class StorePublic extends Component {
+class Store extends Component {
+  constructor(props) {
+    super(props);
 
+    this.state = {
+      owned: false
+    }
+  };
 
+  deleteThisStore() {
+    Meteor.call('stores.remove', this.props.store._id);
+  }
+  plus10M(){
+    Meteor.call('stores.plus10M', this.props.store._id);
+  }
+  minus10M(){
+    Meteor.call('stores.minus10M', this.props.store._id);
+  }
+  plus1M(){
+    Meteor.call('stores.plus1M', this.props.store._id);
+  }
+  minus1M(){
+    Meteor.call('stores.minus1M', this.props.store._id);
+  }
   buyPlayer(){
+    const playerid = this.props.players.map ((player) => player.studentid)
+    const storeid = this.props.store._id
+    if ( playerid.includes(storeid) ){
+      Bert.alert("Player is already in your team!", 'danger')
+    } else {
     if (this.props.user.defaultMoney >= this.props.store.studentPrice) {
     Meteor.call('stores.transfer-testbuy', this.props.store._id, this.props.user._id);
     event.preventDefault();
     // Find the text field via the React ref
+    const studentid = this.props.store._id
     const studentPrice = this.props.store.studentPrice;
     const studentName = this.props.store.studentName;
-    Meteor.call('players.insert', studentName, studentPrice);
+    Meteor.call('players.insert', studentid, studentName, studentPrice);
+    Bert.alert("Check player in your team!", 'success')
     } else {
     Bert.alert('You dont have enough money! Try selling your players to buy this one.', 'danger')
     }
-  }
+  }}
   sellPlayer(){
     Bert.alert('You can not sell this player!', 'danger')
   }
+  function(){
+    const playerid = this.props.players.map ((player) => player.studentid)
+  }
 
   render() {
-    const style = this.props.store.owned ? {display: 'none'} : {};
+    const playerid = this.props.players.map ((player) => player.studentid)
     return (
-            <div className="studentPrice-2ndDIV" style={style}>
+            <div className="studentPrice-2ndDIV">
               <center>
                 <p>Players Name: <strong>{this.props.store.studentName}</strong></p>
                 <p>Players Price: <strong>{this.props.store.studentPrice}M</strong></p>
@@ -37,13 +68,14 @@ export default class StorePublic extends Component {
                 <Button bsStyle="success" className="BuyButton" onClick={this.buyPlayer.bind(this)}>
                 Buy
                 </Button>
-                <Button bsStyle="danger" className="SellButton" onClick={this.sellPlayer.bind(this)}>
+                <Button bsStyle="danger" className="SellButton" onClick={this.sellPlayer.bind(this)} disabled>
                 Sell
                 </Button>
                 </p>
-                <p>Teams bought: {this.props.store.alreadybought}/3</p>
               </center>
             </div>
     );
   }
 }
+
+export default Store;
