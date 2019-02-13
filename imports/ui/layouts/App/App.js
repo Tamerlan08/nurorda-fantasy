@@ -23,12 +23,13 @@ import Teams from '../../pages/teamList/teamInput.js';
 import Matches from '../../pages/teamList/matchInput.js';
 import Students from '../../pages/teamList/studentInput.js';
 import Store from '../../pages/teamList/storeInput.js';
+import MyTeam from '../../pages/teamList/playerInput.js'
 
 import TeamsPublic from '../../pages/teamList/teamInputPublic.js';
 import MatchesPublic from '../../pages/teamList/matchInputPublic.js';
 import StudentsPublic from '../../pages/teamList/studentInputPublic.js';
 import StorePublic from '../../pages/teamList/storeInputPublic.js';
-import MyTeam from '../../pages/teamList/playerInput.js'
+import MyTeamPublic from '../../pages/teamList/playerInputPublic.js'
 
 import NewDocument from '../../pages/NewDocument/NewDocument';
 import ViewDocument from '../../pages/ViewDocument/ViewDocument';
@@ -117,7 +118,7 @@ class App extends React.Component {
             <Authenticated exact path="/matches" component={MatchesPublic} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authenticated exact path="/students" component={StudentsPublic} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authenticated exact path="/store" component={StorePublic} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
-            <Authenticated exact path="/myteam" component={MyTeam} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
+            <Authenticated exact path="/myteam" component={MyTeamPublic} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
 
             <Authenticated exact path="/documents" component={Documents} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authenticated exact path="/documents/new" component={NewDocument} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
@@ -136,6 +137,7 @@ class App extends React.Component {
             <Authorized exact allowedRoles={['admin']} path="/matches-admin" pathAfterFailure="/" component={Matches} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authorized exact allowedRoles={['admin']} path="/students-admin" pathAfterFailure="/" component={Students} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authorized exact allowedRoles={['admin']} path="/store-admin" pathAfterFailure="/" component={Store} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
+            <Authorized exact allowedRoles={['admin']} path="/myteam-admin" pathAfterFailure="/" component={MyTeam} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authorized exact allowedRoles={['admin']} path="/admin/users" pathAfterFailure="/" component={AdminUsers} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authorized exact allowedRoles={['admin']} path="/admin/users/settings" pathAfterFailure="/" component={AdminUserSettings} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authorized exact allowedRoles={['admin']} path="/admin/users/:_id" pathAfterFailure="/" component={AdminUser} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />

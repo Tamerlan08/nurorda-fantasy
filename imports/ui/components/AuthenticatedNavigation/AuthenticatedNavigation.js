@@ -52,8 +52,8 @@ const AuthenticatedNavigation = ({ name, history, userId }) => (
         <NavItem eventKey={8.2} href="/store-admin">Transfer Market</NavItem>
       </LinkContainer>: ''}
       {Roles.userIsInRole(userId, 'admin') ?
-      <LinkContainer to="/myteam">
-        <NavItem eventKey={8.2} href="/myteam">My Team</NavItem>
+      <LinkContainer to="/myteam-admin">
+        <NavItem eventKey={8.2} href="/myteam-admin">My Team</NavItem>
       </LinkContainer>: ''}
     </Nav>
     <Nav pullRight>
