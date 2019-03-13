@@ -32,8 +32,6 @@ class Player extends Component {
         return (
                 <div className="studentPrice-2ndDIV">
                   <center>
-                    <p>{this.props.player._id}</p>
-                    <p>{this.props.player.studentid}</p>
                     <p>Players Name: <strong>{this.props.player.studentName}</strong></p>
                     <p>Players Price: <strong>{this.props.player.studentPrice}M</strong></p>
                     <p>
