@@ -224,29 +224,6 @@ class UserPage extends React.Component {
           <Button bsStyle="primary">Learn more</Button>
         </p>
       </Jumbotron>
-        <Row>
-          <Col xs={6}>
-            <FormGroup>
-              <ControlLabel>First Name</ControlLabel>
-              <input
-                type="text"
-                name="firstName"
-                defaultValue={user.profile.name.first}
-                className="form-control"
-              />
-            </FormGroup>
-          </Col>
-        </Row>
-        <FormGroup>
-          <ControlLabel>Email Address</ControlLabel>
-          <input
-            type="email"
-            name="emailAddress"
-            defaultValue={user.emails[0].address}
-            className="form-control"
-          />
-        </FormGroup>
-        <Button type="submit" bsStyle="success">Save Profile</Button>
       </div>
     ) : <div />;
   }

@@ -85,7 +85,7 @@ class PlayerInput extends Component {
     return (
       <div>
         <center><h2>Team Players</h2>
-        <h4>Balance available: <Badge>{user.defaultMoney}M</Badge></h4></center>
+        <h4>Balance available: <Badge>Not Available</Badge></h4></center>
         <div className="DIV-studentPrice">
             {this.renderPlayers()}
         </div>

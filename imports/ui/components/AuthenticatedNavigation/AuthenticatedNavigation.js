@@ -12,12 +12,12 @@ const AuthenticatedNavigation = ({ name, history, userId }) => (
         <NavItem eventKey={1} href="/documents">Notes</NavItem>
       </LinkContainer>
       {!Roles.userIsInRole(userId, 'admin') ?
-      <LinkContainer to="/userPage">
-        <NavItem eventKey={9} href="/userPage">My Page</NavItem>
+      <LinkContainer to="/my-page">
+        <NavItem eventKey={9} href="/my-page">My Page</NavItem>
       </LinkContainer> : ''}
       {!Roles.userIsInRole(userId, 'admin') ?
-      <LinkContainer to="/teams">
-        <NavItem eventKey={2} href="/teams">Teams</NavItem>
+      <LinkContainer to="/rating">
+        <NavItem eventKey={2} href="/rating">Rating</NavItem>
       </LinkContainer> : ''}
       {!Roles.userIsInRole(userId, 'admin') ?
       <LinkContainer to="/matches">
@@ -36,8 +36,8 @@ const AuthenticatedNavigation = ({ name, history, userId }) => (
         <NavItem eventKey={8.2} href="/myteam">My Team</NavItem>
       </LinkContainer>: ''}
       {Roles.userIsInRole(userId, 'admin') ?
-      <LinkContainer to="/teams-admin">
-        <NavItem eventKey={5.1} href="/teams-admin">Teams</NavItem>
+      <LinkContainer to="/rating-admin">
+        <NavItem eventKey={5.1} href="/rating-admin">Rating</NavItem>
       </LinkContainer> : ''}
       {Roles.userIsInRole(userId, 'admin') ?
       <LinkContainer to="/matches-admin">

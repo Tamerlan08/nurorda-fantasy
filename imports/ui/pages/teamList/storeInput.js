@@ -94,7 +94,7 @@ class StoreInput extends Component {
               <div className="StoreMain">
                 <center>
                 <h2>Transfer Market</h2>
-                <h4>Balance available: <Badge>{user.defaultMoney}M</Badge></h4>
+                <h4>Balance available: <Badge>Not Available</Badge></h4>
               <div>
               <ButtonGroup justified className="StoreStudent">
                 <DropdownButton className="dropdown-studentPrice"

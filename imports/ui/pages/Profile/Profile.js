@@ -22,7 +22,7 @@ const StyledProfile = styled.div`
   .nav.nav-tabs {
     margin-bottom: 20px;
   }
-  
+
   .LoggedInWith {
     padding: 20px;
     border-radius: 3px;
@@ -261,7 +261,8 @@ class Profile extends React.Component {
           />
           <InputHint>Use at least six characters.</InputHint>
         </FormGroup>
-        <Button type="submit" bsStyle="success">Save Profile</Button>
+        <Button className="SaveProfileButton" type="submit" bsStyle="success">Save Profile</Button>
+        <Button className="DeleteProfileButton" bsStyle="danger" onClick={this.handleDeleteAccount}>Delete My Account</Button>
       </div>
     ) : <div />;
   }
@@ -285,12 +286,6 @@ class Profile extends React.Component {
                 <form ref={form => (this.form = form)} onSubmit={event => event.preventDefault()}>
                   {this.renderProfileForm(loading, user)}
                 </form>
-                <AccountPageFooter>
-                  <p><Button bsStyle="link" className="btn-export" onClick={this.handleExportData}>Export my data</Button> – Download all of your documents as .txt files in a .zip</p>
-                </AccountPageFooter>
-                <AccountPageFooter>
-                  <Button bsStyle="danger" onClick={this.handleDeleteAccount}>Delete My Account</Button>
-                </AccountPageFooter>
               </Col>
             </Row>
           </Tab>

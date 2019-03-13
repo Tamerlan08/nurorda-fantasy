@@ -170,3 +170,14 @@ Table {
 .SellButton {
   width: 40%;
 }
+
+
+
+.DeleteProfileButton {
+  float: right;
+  width: 45%;
+}
+.SaveProfileButton {
+  float: left;
+  width: 45%;
+}

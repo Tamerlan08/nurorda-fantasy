@@ -113,8 +113,8 @@ class App extends React.Component {
         <Grid>
           <Switch>
             <Route exact name="index" path="/" component={Index} />
-            <Authenticated exact path="/userPage" component={UserPage} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
-            <Authenticated exact path="/teams" component={TeamsPublic} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
+            <Authenticated exact path="/my-page" component={UserPage} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
+            <Authenticated exact path="/rating" component={TeamsPublic} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authenticated exact path="/matches" component={MatchesPublic} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authenticated exact path="/players" component={StudentsPublic} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authenticated exact path="/store" component={StorePublic} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
@@ -133,7 +133,7 @@ class App extends React.Component {
             <Route name="terms" path="/terms" component={Terms} />
             <Route name="privacy" path="/privacy" component={Privacy} />
             <Route name="examplePage" path="/example-page" component={ExamplePage} />
-            <Authorized exact allowedRoles={['admin']} path="/teams-admin" pathAfterFailure="/" component={Teams} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
+            <Authorized exact allowedRoles={['admin']} path="/rating-admin" pathAfterFailure="/" component={Teams} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authorized exact allowedRoles={['admin']} path="/matches-admin" pathAfterFailure="/" component={Matches} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authorized exact allowedRoles={['admin']} path="/players-admin" pathAfterFailure="/" component={Students} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authorized exact allowedRoles={['admin']} path="/store-admin" pathAfterFailure="/" component={Store} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />

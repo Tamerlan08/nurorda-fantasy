@@ -65,7 +65,7 @@ class Store extends Component {
                 <p>Players Name: <strong>{this.props.store.studentName}</strong></p>
                 <p>Players Price: <strong>{this.props.store.studentPrice}M</strong></p>
                 <p>
-                <Button bsStyle="success" className="BuyButton" onClick={this.buyPlayer.bind(this)}>
+                <Button bsStyle="success" className="BuyButton" onClick={this.buyPlayer.bind(this)} disabled>
                 Buy
                 </Button>
                 <Button bsStyle="danger" className="SellButton" onClick={this.sellPlayer.bind(this)} disabled>
