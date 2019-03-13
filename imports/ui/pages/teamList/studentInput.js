@@ -78,7 +78,7 @@ import Navigation from '../../components/Navigation/Navigation';
     return (
       <div className="StudentGrid">
         <center>
-          <h1 className="StudentTitle">Add Student</h1>
+          <h1 className="StudentTitle">Add Player</h1>
             <div className="StudentSurname">
               <form className="Surname">
                 <input className="input-Surname"

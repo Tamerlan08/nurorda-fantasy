@@ -24,8 +24,8 @@ const AuthenticatedNavigation = ({ name, history, userId }) => (
         <NavItem eventKey={3} href="/matches">Matches</NavItem>
       </LinkContainer> : ''}
       {!Roles.userIsInRole(userId, 'admin') ?
-      <LinkContainer to="/students">
-        <NavItem eventKey={4} href="/students">Students</NavItem>
+      <LinkContainer to="/players">
+        <NavItem eventKey={4} href="/players">Players</NavItem>
       </LinkContainer> : ''}
       {!Roles.userIsInRole(userId, 'admin') ?
       <LinkContainer to="/store">
@@ -44,8 +44,8 @@ const AuthenticatedNavigation = ({ name, history, userId }) => (
         <NavItem eventKey={5.2} href="/matches-admin">Matches</NavItem>
       </LinkContainer> : ''}
       {Roles.userIsInRole(userId, 'admin') ?
-      <LinkContainer to="/students-admin">
-        <NavItem eventKey={8.1} href="/students-admin">Students</NavItem>
+      <LinkContainer to="/players-admin">
+        <NavItem eventKey={8.1} href="/players-admin">Players</NavItem>
       </LinkContainer>: ''}
       {Roles.userIsInRole(userId, 'admin') ?
       <LinkContainer to="/store-admin">
