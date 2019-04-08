@@ -90,7 +90,7 @@ class Logout extends React.Component {
         <h1>Stay safe out there</h1>
         <p>{`Don't forget to like and follow Nurorda elsewhere on the web:`}</p>
         <ul className="FollowUsElsewhere">
-          <li><a href={`https://instagram.com/nurorda.sports?utm_source=ig_profile_share&igshid=1uiu9dqakye6h`}><Icon iconStyle="brand" icon="instagram" /></a></li>
+          <li><a href={`https://instagram.com/nurorda.kz?utm_source=ig_profile_share&igshid=s030f8o31pr7`}><Icon iconStyle="brand" icon="instagram" /></a></li>
           <li><a href={`https://www.youtube.com/user/nurordatv`}><Icon iconStyle="brand" icon="youtube" /></a></li>
         </ul>
       </StyledLogout>

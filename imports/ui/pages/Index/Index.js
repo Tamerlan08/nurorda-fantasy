@@ -71,7 +71,7 @@ const Index = () => (
     <h1>Nurorda Fantasy</h1>
     <p>Football fantasy of Nurorda.</p>
     <div>
-      <Button href="https://nurorda.kz/">School page</Button>
+      <Button href="https://www.nurorda.kz/">School page</Button>
       <Button href="https://goo.gl/forms/M14nQzVXHcDw3n7D2"><i className="fa fa-star"/> Leave a feedback!</Button>
     </div>
     <p><Button href="https://youtu.be/dQw4w9WgXcQ" className="invis" type="button">Tengiz: find 10geese's comment</Button></p>
