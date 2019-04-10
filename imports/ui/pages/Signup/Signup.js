@@ -97,6 +97,7 @@ class Signup extends React.Component {
                     <ControlLabel>First Name</ControlLabel>
                     <input
                       type="text"
+                      pattern="[A-Za-zА-Яа-яЁё]"
                       name="firstName"
                       className="form-control"
                     />

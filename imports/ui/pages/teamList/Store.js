@@ -44,6 +44,7 @@ class Store extends Component {
     const studentid = this.props.store._id
     const studentPrice = this.props.store.studentPrice;
     const studentName = this.props.store.studentName;
+    // const studentSurname = this.props.store.studentSurname;
     Meteor.call('players.insert', studentid, studentName, studentPrice);
     Bert.alert("Check player in your team!", 'success')
     } else {

@@ -181,3 +181,26 @@ Table {
   float: left;
   width: 45%;
 }
+.hello-user {
+  float: left;
+  width: 60%;
+}
+.table-user {
+  float: right;
+  width: 40%;
+}
+
+@media screen and (max-width: 992px){
+  .hello-user {
+    float: left;
+    width: 100%;
+  }
+  .table-user {
+    float: right;
+    width: 100%;
+  }
+  .DIV-studentPrice {
+    display: grid;
+    grid-template-columns: repeat(2, 50%);
+  }
+}

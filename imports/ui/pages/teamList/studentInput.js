@@ -161,7 +161,7 @@ export default withTracker(() => {
   Meteor.subscribe('students');
   Meteor.subscribe('teams');
   return {
-    students: Students.find({}, { sort: { createdAt: -1 } }).fetch(),
+    students: Students.find({}, { sort: { average: -1 } }).fetch(),
     teams: Teams.find({}, { sort: { createdAt: -1 } }).fetch(),
     incompleteCount: Students.find({ checked: { $ne: false } }).count(),
     currentUser: Meteor.user(),

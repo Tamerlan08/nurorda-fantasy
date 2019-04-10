@@ -10,61 +10,85 @@ export default class Student extends Component {
     Meteor.call('students.remove', this.props.student._id);
   }
   TotaladdPlus(){
-    Meteor.call('students.addPlus', this.props.student._id)
+    Meteor.call('students.addPlus', this.props.student._id);
+    Meteor.call('students.averageNumber', this.props.student._id);
+    Meteor.call('students.averageCalculate', this.props.student._id);
   }
   TotaladdMinus(){
     if (this.props.student.score > 0){
-    Meteor.call('students.addMinus', this.props.student._id)
+    Meteor.call('students.addMinus', this.props.student._id);
+    Meteor.call('students.averageNumber', this.props.student._id);
+    Meteor.call('students.averageCalculate', this.props.student._id);
     }else{
     Bert.alert('Score can not be negative!', 'danger')
     }
   }
   TotaladdTwo(){
-    Meteor.call('students.addscoreSecond' , this.props.student._id)
+    Meteor.call('students.addscoreSecond' , this.props.student._id);
+    Meteor.call('students.averageNumber', this.props.student._id);
+    Meteor.call('students.averageCalculate', this.props.student._id);
   }
   TotalminusTwo(){
     if (this.props.student.scoreSecond > 0){
-    Meteor.call('students.minusscoreSecond' , this.props.student._id)
-    }else{
+    Meteor.call('students.minusscoreSecond' , this.props.student._id);
+    Meteor.call('students.averageNumber', this.props.student._id);
+    Meteor.call('students.averageCalculate', this.props.student._id);
+  }else{
     Bert.alert('Score can not be negative!', 'danger')
     }
   }
   TotaladdThird(){
-    Meteor.call('students.addscoreThird' , this.props.student._id)
+    Meteor.call('students.addscoreThird' , this.props.student._id);
+    Meteor.call('students.averageNumber', this.props.student._id);
+    Meteor.call('students.averageCalculate', this.props.student._id);
   }
   TotalminusThird(){
     if (this.props.student.scoreThird > 0){
-    Meteor.call('students.minusscoreThird' , this.props.student._id)
+    Meteor.call('students.minusscoreThird' , this.props.student._id);
+    Meteor.call('students.averageNumber', this.props.student._id);
+    Meteor.call('students.averageCalculate', this.props.student._id);
     }else{
     Bert.alert('Score can not be negative!', 'danger')
     }
   }
   TotaladdFourth(){
-    Meteor.call('students.addscoreFourth' , this.props.student._id)
+    Meteor.call('students.addscoreFourth' , this.props.student._id);
+    Meteor.call('students.averageNumber', this.props.student._id);
+    Meteor.call('students.averageCalculate', this.props.student._id);
   }
   TotalminusFourth(){
     if (this.props.student.scoreFourth > 0){
-    Meteor.call('students.minusscoreFourth' , this.props.student._id)
+    Meteor.call('students.minusscoreFourth' , this.props.student._id);
+    Meteor.call('students.averageNumber', this.props.student._id);
+    Meteor.call('students.averageCalculate', this.props.student._id);
     }else{
     Bert.alert('Score can not be negative!', 'danger')
     }
   }
   TotaladdFifth(){
-    Meteor.call('students.addscoreFifth' , this.props.student._id)
+    Meteor.call('students.addscoreFifth' , this.props.student._id);
+    Meteor.call('students.averageNumber', this.props.student._id);
+    Meteor.call('students.averageCalculate', this.props.student._id);
   }
   TotalminusFifth(){
     if (this.props.student.scoreFifth > 0){
-    Meteor.call('students.minusscoreFifth' , this.props.student._id)
+    Meteor.call('students.minusscoreFifth' , this.props.student._id);
+    Meteor.call('students.averageNumber', this.props.student._id);
+    Meteor.call('students.averageCalculate', this.props.student._id);
     }else{
     Bert.alert('Score can not be negative!', 'danger')
     }
   }
   TotaladdSix(){
-    Meteor.call('students.addscoreSix' , this.props.student._id)
+    Meteor.call('students.addscoreSix' , this.props.student._id);
+    Meteor.call('students.averageNumber', this.props.student._id);
+    Meteor.call('students.averageCalculate', this.props.student._id);
   }
   TotalminusSix(){
     if (this.props.student.scoreSix > 0){
-    Meteor.call('students.minusscoreSix' , this.props.student._id)
+    Meteor.call('students.minusscoreSix' , this.props.student._id);
+    Meteor.call('students.averageNumber', this.props.student._id);
+    Meteor.call('students.averageCalculate', this.props.student._id);
     }else{
     Bert.alert('Score can not be negative!', 'danger')
     }
@@ -138,7 +162,7 @@ export default class Student extends Component {
                 </Button>
               </td>
               <td>
-               {this.props.student.averageScore}
+               {this.props.student.average}
               </td>
               <td>
                {this.props.student.totalScore}

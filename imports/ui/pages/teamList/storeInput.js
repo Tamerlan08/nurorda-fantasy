@@ -28,11 +28,16 @@ class StoreInput extends Component {
   };
 
   handleSelectStudent(eventKey, event) {
-    const students = this.props.students.map ((student) => student.name)
-    this.setState({ selectedOptionStudent: students[eventKey] });
+    const studentSurnames = this.props.students.map ((student) => student.surname)
+    const studentNames = this.props.students.map ((student) => student.name)
+    this.setState({ selectedOptionStudent: studentSurnames[eventKey] + " " + studentNames[eventKey] });
   }
 
   OnehandleSubmit(event) {
+    const studentPrice1 = ReactDOM.findDOMNode(this.refs.studentPrice).value.trim();;
+    if (studentPrice1 == ""){
+      Bert.alert("Enter price first!", 'danger')
+    } else {
     event.preventDefault();
 
     // Find the text field via the React ref
@@ -42,7 +47,7 @@ class StoreInput extends Component {
 
     // Clear form
  ReactDOM.findDOMNode(this.refs.studentPrice).value = '';
-}
+}}
 
   toggleHideCompleted() {
     this.setState({
@@ -79,7 +84,7 @@ class StoreInput extends Component {
   }
 
   render() {
-    const students = this.props.students.map ((student) => student.name)
+    const students = this.props.students.map ((student) => student.surname + " " + student.name)
     const playerid = this.props.players.map ((player) => player.studentid)
     const {selectedOption} = this.state;
     const { user } = this.props;

@@ -17,18 +17,21 @@ import Authorized from '../../components/Authorized/Authorized';
 import Public from '../../components/Public/Public';
 import Index from '../../pages/Index/Index';
 import UserPage from '../../pages/UserPage/UserPage';
+import DocRedirect from '../../pages/teamList/redirect';
 
 import Teams from '../../pages/teamList/teamInput.js';
 import Matches from '../../pages/teamList/matchInput.js';
 import Students from '../../pages/teamList/studentInput.js';
 import Store from '../../pages/teamList/storeInput.js';
-import MyTeam from '../../pages/teamList/playerInput.js'
+import MyTeam from '../../pages/teamList/playerInput.js';
+import SelectTeam from '../../pages/teamList/UsersTeam.js';
 
 import TeamsPublic from '../../pages/teamList/teamInputPublic.js';
 import MatchesPublic from '../../pages/teamList/matchInputPublic.js';
 import StudentsPublic from '../../pages/teamList/studentInputPublic.js';
 import StorePublic from '../../pages/teamList/storeInputPublic.js';
-import MyTeamPublic from '../../pages/teamList/playerInputPublic.js'
+import MyTeamPublic from '../../pages/teamList/playerInputPublic.js';
+import MyTeamTable from '../../pages/teamList/PlayerPublicTableInput.js';
 
 import Signup from '../../pages/Signup/Signup';
 import Login from '../../pages/Login/Login';
@@ -109,6 +112,8 @@ class App extends React.Component {
         <Grid>
           <Switch>
             <Route exact name="index" path="/" component={Index} />
+            <Authenticated exact path="/documents" component={DocRedirect} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
+            <Authenticated exact path="/teamselect" component={SelectTeam} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authenticated exact path="/my-page" component={UserPage} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authenticated exact path="/rating" component={TeamsPublic} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authenticated exact path="/matches" component={MatchesPublic} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
@@ -116,6 +121,7 @@ class App extends React.Component {
             <Authenticated exact path="/store" component={StorePublic} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authenticated exact path="/myteam" component={MyTeamPublic} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authenticated exact path="/profile" component={Profile} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
+            <Authenticated exact path="/myteamtable" component={MyTeamTable} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Public path="/signup" component={Signup} {...props} {...state} />
             <Public path="/login" component={Login} {...props} {...state} />
             <Route path="/logout" render={routeProps => <Logout {...routeProps} setAfterLoginPath={setAfterLoginPath} />} {...props} {...state} />

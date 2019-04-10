@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import autoBind from 'react-autobind';
 import FileSaver from 'file-saver';
 import base64ToBlob from 'b64-to-blob';
-import { Row, Col, FormGroup, ControlLabel, Button, Tabs, Tab, Jumbotron } from 'react-bootstrap';
+import { Row, Col, FormGroup, ControlLabel, Button, Tabs, Tab, Jumbotron, Table } from 'react-bootstrap';
 import _ from 'lodash';
 import styled from 'styled-components';
 import { Meteor } from 'meteor/meteor';
@@ -17,6 +17,8 @@ import AccountPageFooter from '../../components/AccountPageFooter/AccountPageFoo
 import UserSettings from '../../components/UserSettings/UserSettings';
 import validate from '../../../modules/validate';
 import getUserProfile from '../../../modules/get-user-profile';
+import Team from '../teamList/teamInputPublic';
+import MyTeamTable from '../teamList/PlayerPublicTableInput.js';
 
 const StyledProfile = styled.div`
   .nav.nav-tabs {
@@ -211,19 +213,30 @@ class UserPage extends React.Component {
   renderPasswordUser(loading, user) {
     return !loading ? (
       <div>
-      <Jumbotron>
-        <h1>Hello {user.profile.name.first}!</h1>
-        <p>
-          We are happy to see you here at Nurorda Fantasy League App!
-        </p>
-        <p>
-          You have now {user.defaultMoney} millions fancoins to spend on transfers!
-          The season starts very soon, so hurry up to assemble your team!
-        </p>
-        <p>
-          <Button bsStyle="primary">Learn more</Button>
-        </p>
-      </Jumbotron>
+        <div className="hello-user">
+          <Jumbotron>
+            <h1>Hello {user.profile.name.first}!</h1>
+            <p>
+              We are happy to see you here at Nurorda Fantasy League App!
+            </p>
+            <p>
+              You have now {user.defaultMoney} millions fancoins to spend on transfers!
+              The season starts very soon, so hurry up to assemble your team!
+            </p>
+            <p>
+              <Button bsStyle="primary">Learn more</Button>
+            </p>
+          </Jumbotron>
+        </div>
+        <div className="table-user">
+          <center>
+          <Jumbotron>
+          <h3>Scores of all teams</h3>
+          <h4>Team selected:</h4>
+            <Team />
+          </Jumbotron>
+          </center>
+        </div>
       </div>
     ) : <div />;
   }
@@ -241,13 +254,9 @@ class UserPage extends React.Component {
       <StyledProfile>
         <Tabs animation={false} activeKey={this.state.activeTab} onSelect={activeTab => this.setState({ activeTab })} id="admin-user-tabs">
           <Tab eventKey="profile" title="Profile">
-            <Row>
-              <Col xs={12} sm={8} md={8}>
-                <form ref={form => (this.form = form)} onSubmit={event => event.preventDefault()}>
-                  {this.renderProfileForm(loading, user)}
-                </form>
-              </Col>
-            </Row>
+            <form ref={form => (this.form = form)} onSubmit={event => event.preventDefault()}>
+              {this.renderProfileForm(loading, user)}
+            </form>
           </Tab>
           <Tab eventKey="settings" title="Settings">
             { /* Manually check the activeTab value to ensure we refetch settings on re-render of UserSettings */ }

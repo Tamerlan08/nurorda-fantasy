@@ -34,6 +34,14 @@ Meteor.methods({
       name,
       grade,
       team,
+      isAvailable1: false,
+      isAvailable2: false,
+      isAvailable3: false,
+      isAvailable4: false,
+      isAvailable5: false,
+      isAvailable6: false,
+      averageNumber: 0,
+      average: 0,
       score: 0,
       scoreSecond: 0,
       scoreThird: 0,
@@ -58,6 +66,52 @@ Meteor.methods({
     // Students.update(studentId , { $set: { totalScore:student.totalScore }});
     // Students.update(studentId , { $set: { averageScore:student.averageScore }});
   // },  NORM EXAMPLE
+  'students.averageNumber'(studentId) {
+    check(studentId, String)
+    const student = Students.findOne(studentId);
+    if (student.scoreSix == 0){
+      student.isAvailable6 = 0;
+    } else {
+      student.isAvailable6 = 1;
+    }
+    if (student.scoreFifth == 0){
+      student.isAvailable5 = 0;
+    } else {
+      student.isAvailable5 = 1;
+    }
+    if (student.scoreFourth == 0){
+      student.isAvailable4 = 0;
+    } else {
+      student.isAvailable4 = 1;
+    }
+    if (student.scoreThird == 0){
+      student.isAvailable3 = 0;
+    } else {
+      student.isAvailable3 = 1;
+    }
+    if (student.scoreSecond == 0){
+      student.isAvailable2 = 0;
+    } else {
+      student.isAvailable2 = 1;
+    }
+    if (student.score == 0){
+      student.isAvailable1 = 0;
+    } else {
+      student.isAvailable1 = 1;
+    }
+    student.averageNumber = student.isAvailable1 + student.isAvailable2 + student.isAvailable3 + student.isAvailable4 + student.isAvailable5 + student.isAvailable6;
+    console.log("Average Number:", student.averageNumber)
+    Students.update(studentId , { $set: { averageNumber:student.averageNumber }});
+  },
+
+  'students.averageCalculate'(studentId) {
+    check(studentId, String)
+    const student = Students.findOne(studentId);
+    student.average = student.totalScore / student.averageNumber;
+    student.average = student.average.toFixed(2),
+    console.log("Average:", student.average)
+    Students.update(studentId , { $set: { average:student.average }});
+  },
 
   'students.addscoreSix'(studentId) {
     check(studentId, String)

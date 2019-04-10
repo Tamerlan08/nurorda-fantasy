@@ -62,24 +62,18 @@ import Navigation from '../../components/Navigation/Navigation';
   render() {
     return (
       <div>
-        <Grid>
-          <Row>
-            <Col md={12}>
-              <Table bordered condensed>
-                <thead>
-                  <tr>
-                    <td><strong>Team Name</strong></td>
-                    <td><strong>Team Leader</strong></td>
-                    <td><strong>Team Score</strong></td>
-                  </tr>
-                </thead>
-                <tbody>
-                    {this.renderTeams()}
-                </tbody>
-              </Table>
-            </Col>
-          </Row>
-        </Grid>
+        <Table bordered condensed>
+          <thead>
+            <tr>
+              <td><strong>Team Name</strong></td>
+              <td><strong>Team Leader</strong></td>
+              <td><strong>Team Score</strong></td>
+            </tr>
+          </thead>
+          <tbody>
+              {this.renderTeams()}
+          </tbody>
+        </Table>
       </div>
 
     );
