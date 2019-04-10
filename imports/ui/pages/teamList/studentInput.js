@@ -136,12 +136,12 @@ import Navigation from '../../components/Navigation/Navigation';
                   <td><strong>Name</strong></td>
                   <td><strong>Grade</strong></td>
                   <td><strong>Team</strong></td>
-                  <td><strong>First Round</strong></td>
-                  <td><strong>Second Round</strong></td>
-                  <td><strong>Third Round</strong></td>
+                  <td><strong>First Match</strong></td>
+                  <td><strong>Second Match</strong></td>
+                  <td><strong>Third Match</strong></td>
                   <td><strong>Quarter Final</strong></td>
                   <td><strong>Semi Final</strong></td>
-                  <td><strong>Final Round</strong></td>
+                  <td><strong>Final Match</strong></td>
                   <td><strong>Average</strong></td>
                   <td><strong>Total Points</strong></td>
                   <td><strong> EDIT </strong></td>

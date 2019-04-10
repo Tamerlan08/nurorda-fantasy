@@ -43,7 +43,7 @@ class MatchInput extends Component {
 
   OnehandleSubmit(event) {
     event.preventDefault();
-    
+
     // Find the text field via the React ref
     const scoredOne = ReactDOM.findDOMNode(this.refs.ScoredOne).value.trim();
     const scoredTwo = ReactDOM.findDOMNode(this.refs.ScoredTwo).value.trim();
@@ -134,6 +134,9 @@ class MatchInput extends Component {
                             <MenuItem eventKey={'Winter Season'}>
                               Winter Season
                             </MenuItem>
+                            <MenuItem eventKey={'Spring Season'}>
+                              Spring Season
+                            </MenuItem>
                         </DropdownButton>
                       </ButtonGroup>
                       <p></p>
@@ -142,14 +145,14 @@ class MatchInput extends Component {
                           title={this.state.selectedOptionRound}
                           id="document-type"
                           onSelect={this.handleSelectRound.bind(this)}>
-                            <MenuItem eventKey={'First Round'}>
-                              First Round
+                            <MenuItem eventKey={'First Match'}>
+                              First Match
                             </MenuItem>
-                            <MenuItem eventKey={'Second Round'}>
-                              Second Round
+                            <MenuItem eventKey={'Second Match'}>
+                              Second Match
                             </MenuItem>
-                            <MenuItem eventKey={'Third Round'}>
-                              Third Round
+                            <MenuItem eventKey={'Third Match'}>
+                              Third Match
                             </MenuItem>
                             <MenuItem eventKey={'Quarter-final'}>
                               Quarter Final
@@ -157,8 +160,8 @@ class MatchInput extends Component {
                             <MenuItem eventKey={'Semi-final'}>
                               Semi Final
                             </MenuItem>
-                            <MenuItem eventKey={'Final'}>
-                              Final Round
+                            <MenuItem eventKey={'Final Match'}>
+                              Final Match
                             </MenuItem>
                         </DropdownButton>
                       </ButtonGroup>
@@ -224,7 +227,7 @@ class MatchInput extends Component {
               <thead>
                 <tr>
                   <td><strong>Season</strong></td>
-                  <td><strong>Round</strong></td>
+                  <td><strong>Match</strong></td>
                   <td><strong>team1/team2</strong></td>
                   <td><strong> EDIT </strong></td>
                 </tr>
