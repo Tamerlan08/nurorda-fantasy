@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Carousel } from 'react-bootstrap';
 import styled from 'styled-components';
 import { lighten, darken } from 'polished';
 
@@ -9,14 +9,14 @@ const StyledIndex = styled.div`
   border-radius: 3px;
   color: #fff;
 
-  img {
-    width: 100px;
-    height: 100px;
-  }
 
   h1 {
     font-size: 28px;
     color: #ed3137;
+  }
+
+  h4 {
+    color: #FFFFFF;
   }
 
   p {
@@ -67,6 +67,8 @@ const Index = () => (
     <img
       src="https://pbs.twimg.com/profile_images/542279015935905793/tSXd8zJC_400x400.png"
       alt="Nurorda"
+      width="100px"
+      hight="100px"
     />
     <h1>Nurorda Fantasy</h1>
     <p>Football fantasy of Nurorda.</p>
@@ -75,6 +77,37 @@ const Index = () => (
       <Button href="https://goo.gl/forms/M14nQzVXHcDw3n7D2"><i className="fa fa-star"/> Leave a feedback!</Button>
     </div>
     <p><Button href="https://youtu.be/dQw4w9WgXcQ" className="invis" type="button">Tengiz: find 10geese's comment</Button></p>
+    <div className="photos">
+    <Carousel>
+  <Carousel.Item>
+    <img
+      className="d-block w-100"
+      src="https://mail.google.com/mail/u/0?ui=2&ik=b10d7f64c6&attid=0.2&permmsgid=msg-f:1630419687794021070&th=16a06a1155c412ce&view=fimg&sz=s0-l75-ft&attbid=ANGjdJ9wj5riUpOgWu4jxoMd__2LnsaaqH7TdazBu98DCeInjw5BeCPRcb_jmlKWr_squzG5UsZzejoRJmNdEPMzEC16j1oB2v-GSn5sC5FzX-FOYkufFtnzUkh89rQ&disp=emb&realattid=16a069ff8c29e0a05f82"
+      alt="First slide"
+    />
+    <Carousel.Caption>
+      <h1>Nurorda Fantasy</h1>
+      <h4>All you need to know about matches and sports!</h4>
+    </Carousel.Caption>
+  </Carousel.Item>
+  <Carousel.Item>
+    <img
+      className="d-block w-100"
+      src="https://mail.google.com/mail/u/0?ui=2&ik=b10d7f64c6&attid=0.1&permmsgid=msg-f:1630421129072572660&th=16a06b60e8a978f4&view=fimg&sz=s0-l75-ft&attbid=ANGjdJ-OTrYb1MOrBbDtx_LI9i2Q5B16CZgKnCczs4Ypou61JyIWzqmBi40_KmvXZW_RXd0QlAYSXmrxu8yb9_HNqyFiMrb0Wo-gTILYeppBfkPoAxBhFLg4vjCro4M&disp=emb&realattid=16a06b5a9e17f611d2e14"
+      alt="Second slide"
+    />
+
+  </Carousel.Item>
+  <Carousel.Item>
+    <img
+      className="d-block w-100"
+      src="https://mail.google.com/mail/u/0?ui=2&ik=b10d7f64c6&attid=0.2&permmsgid=msg-f:1630421129072572660&th=16a06b60e8a978f4&view=fimg&sz=s0-l75-ft&attbid=ANGjdJ9Yt9wG-Fo9pLq5g8hf13qZmKm1TJ4OR-KPLMlSdWKbwIWgJbCRLMMeVckd6P7Lpy3ppHzIcu0iorSJKX14p7-qBm2ETHvVfXfGnwD2W9Gh9RZDXBtkkPCNZEQ&disp=emb&realattid=16a06b5b7cb1b1b092d2"
+      alt="Third slide"
+    />
+
+  </Carousel.Item>
+</Carousel>;
+    </div>
   </StyledIndex>
 );
 
