@@ -213,21 +213,6 @@ class UserPage extends React.Component {
   renderPasswordUser(loading, user) {
     return !loading ? (
       <div>
-        <div className="hello-user">
-          <Jumbotron>
-            <h1>Hello {user.profile.name.first}!</h1>
-            <p>
-              We are happy to see you here at Nurorda Fantasy League App!
-            </p>
-            <p>
-              You have now {user.defaultMoney} millions fancoins to spend on transfers!
-              The season starts very soon, so hurry up to assemble your team!
-            </p>
-            <p>
-              <Button bsStyle="primary">Learn more</Button>
-            </p>
-          </Jumbotron>
-        </div>
         <div className="table-user">
           <center>
           <Jumbotron>

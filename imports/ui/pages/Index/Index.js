@@ -11,7 +11,7 @@ const StyledIndex = styled.div`
 
 
   h1 {
-    font-size: 28px;
+    font-size: 48px;
     color: #ed3137;
   }
 
@@ -20,7 +20,7 @@ const StyledIndex = styled.div`
   }
 
   p {
-    font-size: 18px;
+    font-size: 36px;
     color: #1c5393;
   }
 
@@ -67,11 +67,13 @@ const Index = () => (
     <img
       src="https://pbs.twimg.com/profile_images/542279015935905793/tSXd8zJC_400x400.png"
       alt="Nurorda"
-      width="100px"
-      hight="100px"
+      width="300px"
+      hight="300px"
     />
+    <br></br>
     <h1>Nurorda Fantasy</h1>
-    <p>Football fantasy of Nurorda.</p>
+    <p>Football fantasy of Nurorda</p>
+    <br></br>
     <div>
       <Button href="https://www.nurorda.kz/">School page</Button>
       <Button href="https://goo.gl/forms/M14nQzVXHcDw3n7D2"><i className="fa fa-star"/> Leave a feedback!</Button>

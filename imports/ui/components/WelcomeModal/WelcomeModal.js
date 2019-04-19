@@ -7,7 +7,7 @@ import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
 import UserSettings from '../UserSettings/UserSettings';
 
-const StyledGDPRConsentModal = styled(Modal)`
+const StyledWelcomeModal = styled(Modal)`
   .modal-body > p {
     margin-bottom: 15px;
   }
@@ -17,7 +17,7 @@ const StyledGDPRConsentModal = styled(Modal)`
   }
 `;
 
-class GDPRConsentModal extends React.Component {
+class WelcomeModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = { show: false };
@@ -47,32 +47,35 @@ class GDPRConsentModal extends React.Component {
 
   render() {
     return (
-      <div className="GDPRConsentModal">
-        <StyledGDPRConsentModal backdrop="static" show={this.state.show} onHide={() => this.setState({ show: false })}>
+      <div className="WelcomeModal">
+        <StyledWelcomeModal backdrop="static" show={this.state.show} onHide={() => this.setState({ show: false })}>
           <Modal.Header>
-            <h4>GDPR Consent</h4>
+            <h4>Welcome!</h4>
           </Modal.Header>
           <Modal.Body>
-            <p>In cooperation with the European Union's (EU) <a href="https://www.eugdpr.org/" target="_blank">General Data Protection Regulation</a> (GDPR), we need to obtain your consent for how we make use of your data. Please review each of the settings below to customize your experience.</p>
-            <UserSettings gdpr />
+            <p className="modalText">We are happy to see you here at Nurorda Fantasy League App!</p>
+            <p className="modalText">
+                You have now <strong>100</strong> million coins to spend on transfers!
+                The season starts very soon, so hurry up to assemble your team!
+            </p>
           </Modal.Body>
           <Modal.Footer>
             <Button
               bsStyle="success"
               onClick={() => {
                 this.handleSaveSettings();
-                this.setState({ show: false });
+                this.setState({ show: false })
               }}
-            >Save Settings</Button>
+            >OK</Button>
           </Modal.Footer>
-        </StyledGDPRConsentModal>
+        </StyledWelcomeModal>
       </div>
     );
   }
 }
 
-GDPRConsentModal.propTypes = {
+WelcomeModal.propTypes = {
   // prop: PropTypes.string.isRequired,
 };
 
-export default GDPRConsentModal;
+export default WelcomeModal;

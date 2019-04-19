@@ -189,6 +189,9 @@ Table {
   float: right;
   width: 40%;
 }
+.modalText {
+  font-size: 120%;
+}
 
 @media screen and (max-width: 992px){
   .hello-user {

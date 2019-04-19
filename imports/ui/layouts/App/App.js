@@ -47,7 +47,7 @@ import NotFound from '../../pages/NotFound/NotFound';
 import Footer from '../../components/Footer/Footer';
 import ExamplePage from '../../pages/ExamplePage/ExamplePage';
 // import VerifyEmailAlert from '../../components/VerifyEmailAlert/VerifyEmailAlert';
-import GDPRConsentModal from '../../components/GDPRConsentModal/GDPRConsentModal';
+import WelcomeModal from '../../components/WelcomeModal/WelcomeModal';
 import { onLogin, onLogout } from '../../../modules/redux/actions';
 import withTrackerSSR from '../../../modules/with-tracker-ssr';
 import getUserName from '../../../modules/get-user-name';
@@ -105,7 +105,7 @@ class App extends React.Component {
     const { props, state, setAfterLoginPath } = this;
     return (
       <StyledApp ready={this.state.ready} loading={props.loading}>
-        {props.authenticated ? <GDPRConsentModal userId={props.userId} /> : ''}
+        {props.authenticated ? <WelcomeModal userId={props.userId} /> : ''}
         <Navigation {...props} {...state} />
         <Grid>
           <Switch>
