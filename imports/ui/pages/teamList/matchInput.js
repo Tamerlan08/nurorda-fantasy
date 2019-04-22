@@ -42,6 +42,21 @@ class MatchInput extends Component {
   }
 
   OnehandleSubmit(event) {
+    const scoredOne1 = ReactDOM.findDOMNode(this.refs.ScoredOne).value.trim();
+    const scoredTwo1 = ReactDOM.findDOMNode(this.refs.ScoredTwo).value.trim();
+    if (this.state.selectedOptionSeason == "Select season"){
+      Bert.alert("Please enter all required details!", 'danger')
+    } else if (this.state.selectedOptionRound == "Select round"){
+      Bert.alert("Please enter all required details!", 'danger')
+    } else if (this.state.selectedOptionTeamOne == "Select team"){
+      Bert.alert("Please enter all required details!", 'danger')
+    } else if (this.state.selectedOptionTeamTwo == "Select team"){
+      Bert.alert("Please enter all required details!", 'danger')
+    } else if ( scoredOne1 == ""){
+      Bert.alert("Please enter all required details!", 'danger')
+    } else if ( scoredTwo1 == ""){
+      Bert.alert("Please enter all required details!", 'danger')
+    } else {
     event.preventDefault();
 
     // Find the text field via the React ref
@@ -56,9 +71,14 @@ class MatchInput extends Component {
     Meteor.call('matchs.insert', scoredOne , scoredTwo, teamOne, teamTwo, round, season);
 
     // Clear form
- ReactDOM.findDOMNode(this.refs.ScoredOne).value = '';
- ReactDOM.findDOMNode(this.refs.ScoredTwo).value= '';
-}
+    ReactDOM.findDOMNode(this.refs.ScoredOne).value = '';
+    ReactDOM.findDOMNode(this.refs.ScoredTwo).value= '';
+    this.setState({ selectedOptionSeason: "Select season" });
+    this.setState({ selectedOptionRound: "Select round" });
+    this.setState({ selectedOptionTeamOne: "Select team" });
+    this.setState({ selectedOptionTeamTwo: "Select team" });
+
+  }}
 
   toggleHideCompleted() {
     this.setState({

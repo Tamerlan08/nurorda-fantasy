@@ -25,6 +25,7 @@ import Students from '../../pages/teamList/studentInput.js';
 import Store from '../../pages/teamList/storeInput.js';
 import MyTeam from '../../pages/teamList/playerInput.js';
 import SelectTeam from '../../pages/teamList/UsersTeam.js';
+import NextMatch from '../../pages/teamList/nextMatchInput.js';
 
 import TeamsPublic from '../../pages/teamList/teamInputPublic.js';
 import MatchesPublic from '../../pages/teamList/matchInputPublic.js';
@@ -127,6 +128,7 @@ class App extends React.Component {
             <Route name="reset-password" path="/reset-password/:token" component={ResetPassword} />
             <Route name="examplePage" path="/example-page" component={ExamplePage} />
             <Authorized exact allowedRoles={['admin']} path="/rating-admin" pathAfterFailure="/rating" component={Teams} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
+            <Authorized exact allowedRoles={['admin']} path="/nextmatch" pathAfterFailure="/" component={NextMatch} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authorized exact allowedRoles={['admin']} path="/matches-admin" pathAfterFailure="/matches" component={Matches} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authorized exact allowedRoles={['admin']} path="/players-admin" pathAfterFailure="/players" component={Students} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authorized exact allowedRoles={['admin']} path="/store-admin" pathAfterFailure="/store" component={Store} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />

@@ -20,6 +20,13 @@ import Navigation from '../../components/Navigation/Navigation';
   };
 
   handleSubmit(event) {
+    const teamName1 = ReactDOM.findDOMNode(this.refs.TeamName).value.trim();
+    const teamLeader1 = ReactDOM.findDOMNode(this.refs.TeamLeader).value.trim();
+    if(teamName1 == ""){
+      Bert.alert("Please enter all required details!", 'danger')
+    } else if (teamLeader1 == ""){
+      Bert.alert("Please enter all required details!", 'danger')
+    } else {
     event.preventDefault();
 
     // Find the text field via the React ref
@@ -32,7 +39,7 @@ import Navigation from '../../components/Navigation/Navigation';
     ReactDOM.findDOMNode(this.refs.TeamName).value = '';
     ReactDOM.findDOMNode(this.refs.TeamLeader).value= '';
 
-   }
+  }}
 
   toggleHideCompleted() {
     this.setState({
@@ -127,7 +134,7 @@ import Navigation from '../../components/Navigation/Navigation';
 }
 export default withTracker(() => {
   Meteor.subscribe('teams');
-  
+
   return {
     teams: Teams.find({}, {sort: {score: -1 }}).fetch(),
     incompleteCount: Teams.find({ checked: { $ne: false } }).count(),

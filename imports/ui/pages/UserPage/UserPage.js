@@ -18,7 +18,7 @@ import UserSettings from '../../components/UserSettings/UserSettings';
 import validate from '../../../modules/validate';
 import getUserProfile from '../../../modules/get-user-profile';
 import Team from '../teamList/teamInputPublic';
-import MyTeamTable from '../teamList/PlayerPublicTableInput.js';
+import PublicTable from '../teamList/PlayerPublicTableInput.js';
 
 const StyledProfile = styled.div`
   .nav.nav-tabs {
@@ -210,22 +210,6 @@ class UserPage extends React.Component {
       </div>) : <div />;
   }
 
-  renderPasswordUser(loading, user) {
-    return !loading ? (
-      <div>
-        <div className="table-user">
-          <center>
-          <Jumbotron>
-          <h3>Scores of all teams</h3>
-          <h4>Team selected:</h4>
-            <Team />
-          </Jumbotron>
-          </center>
-        </div>
-      </div>
-    ) : <div />;
-  }
-
   renderProfileForm(loading, user) {
     return !loading ? ({
       password: this.renderPasswordUser,
@@ -237,17 +221,23 @@ class UserPage extends React.Component {
     const { loading, user } = this.props;
     return (
       <StyledProfile>
-        <Tabs animation={false} activeKey={this.state.activeTab} onSelect={activeTab => this.setState({ activeTab })} id="admin-user-tabs">
-          <Tab eventKey="profile" title="Profile">
-            <form ref={form => (this.form = form)} onSubmit={event => event.preventDefault()}>
-              {this.renderProfileForm(loading, user)}
-            </form>
-          </Tab>
-          <Tab eventKey="settings" title="Settings">
-            { /* Manually check the activeTab value to ensure we refetch settings on re-render of UserSettings */ }
-            {this.state.activeTab === 'settings' ? <UserSettings /> : ''}
-          </Tab>
-        </Tabs>
+      <div>
+        <center>
+          <div className="table-user-first">
+            <Jumbotron>
+              <h3>Scores of all teams</h3>
+              <h4>You can find your team here</h4>
+              <Team />
+            </Jumbotron>
+          </div>
+          <div className="table-user-second">
+            <Jumbotron>
+              <h3>Your team composition</h3>
+              <PublicTable />
+            </Jumbotron>
+          </div>
+        </center>
+      </div>
       </StyledProfile>
     );
   }

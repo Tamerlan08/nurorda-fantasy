@@ -172,6 +172,28 @@ Table {
 }
 
 
+/* CSS added to Store page */
+.nextMatch-div{
+  border: double red;
+  background-color: #3399CC;
+  width: 100%;
+}
+.nextMatch-round{
+  font-size: 400%;
+  line-height: 70%;
+  color: #294D88;
+}
+.nextMatch-date{
+  font-size: 240%;
+  line-height: 70%;
+  color: #294D88;
+}
+.nextMatch-team{
+  font-size: 300%;
+  line-height: 70%;
+  color: #294D88;
+}
+
 
 .DeleteProfileButton {
   float: right;
@@ -185,9 +207,13 @@ Table {
   float: left;
   width: 60%;
 }
-.table-user {
+.table-user-first {
+  float: left;
+  width: 100%;
+}
+.table-user-second {
   float: right;
-  width: 40%;
+  width: 100%;
 }
 .modalText {
   font-size: 120%;
@@ -198,12 +224,50 @@ Table {
     float: left;
     width: 100%;
   }
-  .table-user {
+  .table-user-first {
+    float: right;
+    width: 100%;
+  }
+  .table-user-second {
     float: right;
     width: 100%;
   }
   .DIV-studentPrice {
     display: grid;
     grid-template-columns: repeat(2, 50%);
+  }
+  .nextMatch-round{
+    font-size: 200%;
+    line-height: 50%;
+  }
+  .nextMatch-date{
+    font-size: 120%;
+    line-height: 50%;
+  }
+  .nextMatch-team{
+    font-size: 150%;
+    line-height: 50%;
+    width: 100%;
+  }
+  .plus1{
+    width: 40%;
+  }
+  .minus1{
+    width: 40%;
+  }
+  .MatchSeason{
+    width: 80%;
+  }
+  .MatchRound{
+    width: 80%;
+  }
+  .MatchTeamDropdown{
+    width: 80%;
+  }
+  .input-TeamOne {
+      width: 80%;
+  }
+  .input-TeamTwo {
+      width: 80%;
   }
 }

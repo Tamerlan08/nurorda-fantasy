@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Carousel } from 'react-bootstrap';
 import styled from 'styled-components';
 import { lighten, darken } from 'polished';
+import NextMatch from '../teamList/nextMatchInputPublic.js';
 
 const StyledIndex = styled.div`
   padding: 20px;
@@ -10,18 +11,27 @@ const StyledIndex = styled.div`
   color: #fff;
 
 
-  h1 {
+  .indexh1 {
     font-size: 48px;
     color: #ed3137;
   }
-
   h4 {
     color: #FFFFFF;
   }
-
-  p {
+  .imgslide{
+    width: 700px;
+    height: 700px;
+  }
+  .indexp {
     font-size: 36px;
     color: #1c5393;
+  }
+  .indeximg{
+    width: 25%;
+    height: 25%;
+  }
+  .nextmatchindex{
+    width: 68%;
   }
 
   > div {
@@ -58,49 +68,68 @@ const StyledIndex = styled.div`
       margin: 40px -40px -40px;
     }
   }
+  @media screen and (max-width: 992px){
+    .indeximg{
+      width: 25%;
+      height: 25%;
+    }
+    .indexh1 {
+      font-size: 24px;
+      color: #ed3137;
+    }
+    .indexp {
+      font-size: 18px;
+      color: #1c5393;
+    }
+    .nextmatchindex{
+      width: 100%;
+    }
+  }
 `;
 
 console.log("205147926");
 Tengiz = "d1 86 d1 80 d0 b9 d0 be d0 b4 d1 81 20 d0 b4 d0 bc 20 d0 bb d0 b4 d0 bf d0 bf d1 80 d0 b9 20 d0 b4 d0 b9 20 d1 86 d0 bb d1 80 20 d0 bc d0 b4 d1 86 d1 80 20 d1 86 d0 b3 d0 b8 20 d1 86 d0 ba 20 d1 88 d0 b4 d0 b9 d0 bf 20 d0 bb d0 b4 d0 b7"
 const Index = () => (
   <StyledIndex>
-    <img
+    <img className="indeximg"
       src="https://pbs.twimg.com/profile_images/542279015935905793/tSXd8zJC_400x400.png"
       alt="Nurorda"
       width="300px"
       hight="300px"
     />
     <br></br>
-    <h1>Nurorda Fantasy</h1>
-    <p>Football fantasy of Nurorda</p>
+    <h1 className="indexh1">Nurorda Fantasy</h1>
+    <p className="indexp">Football fantasy of Nurorda</p>
     <br></br>
     <div>
       <Button href="https://www.nurorda.kz/">School page</Button>
       <Button href="https://goo.gl/forms/M14nQzVXHcDw3n7D2"><i className="fa fa-star"/> Leave a feedback!</Button>
     </div>
     <p><Button href="https://youtu.be/dQw4w9WgXcQ" className="invis" type="button">Tengiz: find 10geese's comment</Button></p>
+    <div className="nextmatchindex">
+      <NextMatch />
+    </div>
     <div className="photos">
-    <Carousel>
-  <Carousel.Item>
-    <img
-      className="d-block w-100"
-      src="https://i.imgur.com/x5SixnD.jpg"
-      alt="First slide"
-    />
-    <Carousel.Caption>
-      <h1>Nurorda Fantasy</h1>
-      <h4>All you need to know about matches and sports!</h4>
-    </Carousel.Caption>
-  </Carousel.Item>
-  <Carousel.Item>
-    <img
-      className="d-block w-100"
-      src="https://i.imgur.com/9TCgiQM.jpg"
-      alt="Second slide"
-    />
-
-  </Carousel.Item>
-</Carousel>;
+      <Carousel>
+        <Carousel.Item>
+          <img
+            className="imgslide"
+            src="https://i.imgur.com/x5SixnD.jpg"
+            alt="First slide"
+          />
+          <Carousel.Caption>
+            <h1 className="indexh1">Nurorda Fantasy</h1>
+            <h4>All you need to know about matches and sports!</h4>
+          </Carousel.Caption>
+        </Carousel.Item>
+        <Carousel.Item>
+          <img
+            className="imgslide"
+            src="https://i.imgur.com/9TCgiQM.jpg"
+            alt="Second slide"
+          />
+        </Carousel.Item>
+      </Carousel>;
     </div>
   </StyledIndex>
 );

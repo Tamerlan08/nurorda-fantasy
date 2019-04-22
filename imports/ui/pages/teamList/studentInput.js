@@ -28,23 +28,34 @@ import Navigation from '../../components/Navigation/Navigation';
   }
 
   handleSubmit(event) {
+    const name1 = ReactDOM.findDOMNode(this.refs.Name).value.trim();
+    const surname1 = ReactDOM.findDOMNode(this.refs.Surname).value.trim();
+    const grade1 = ReactDOM.findDOMNode(this.refs.Grade).value.trim();
+    if ( name1 == ""){
+      Bert.alert("Please enter all required details!", 'danger')
+    } else if ( surname1 == ""){
+      Bert.alert("Please enter all required details!", 'danger')
+    } else if ( grade1 == ""){
+      Bert.alert("Please enter all required details!", 'danger')
+    } else if ( this.state.selectedOptionTeam == "Select team"){
+      Bert.alert("Please enter all required details!", 'danger')
+    } else {
     event.preventDefault();
 
     // Find the text field via the React ref
     const name = ReactDOM.findDOMNode(this.refs.Name).value.trim();
     const surname = ReactDOM.findDOMNode(this.refs.Surname).value.trim();
     const grade = ReactDOM.findDOMNode(this.refs.Grade).value.trim();
-
     const team = this.state.selectedOptionTeam;
 
     Meteor.call('students.insert', surname,name,grade,team);
 
     // Clear form
- ReactDOM.findDOMNode(this.refs.Surname).value = '';
- ReactDOM.findDOMNode(this.refs.Name).value = '';
- ReactDOM.findDOMNode(this.refs.Grade).value= '';
-
-}
+    ReactDOM.findDOMNode(this.refs.Surname).value = '';
+    ReactDOM.findDOMNode(this.refs.Name).value = '';
+    ReactDOM.findDOMNode(this.refs.Grade).value= '';
+    this.setState({ selectedOptionTeam: "Select team" });
+  }}
 
   toggleHideCompleted() {
     this.setState({

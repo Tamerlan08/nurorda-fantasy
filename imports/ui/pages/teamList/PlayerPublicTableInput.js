@@ -11,7 +11,7 @@ import StudentInput from './studentInput.js'
 import { Students } from '../../../api/students.js';
 import Student from './Student.js';
 import { Players } from '../../../api/players.js';
-import Player from './PlayerPublicTableInput.js';
+import Player from './PlayerPublicTable.js';
 import { Stores } from '../../../api/stores.js';
 import Store from './Store.js';
 import getUserProfile from '../../../modules/get-user-profile';
@@ -52,7 +52,7 @@ class PlayerInput extends Component {
     });
   }
 
-  renderPlayers() {
+  renderPlayers1() {
     let filteredPlayers = this.props.players;
     if (this.state.hideCompleted) {
       filteredPlayers = filteredPlayers.filter(player => !Player.checked);
@@ -92,7 +92,7 @@ class PlayerInput extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.renderPlayers()}
+            {this.renderPlayers1()}
           </tbody>
         </Table>
       </div>

@@ -36,7 +36,9 @@ class StoreInput extends Component {
   OnehandleSubmit(event) {
     const studentPrice1 = ReactDOM.findDOMNode(this.refs.studentPrice).value.trim();;
     if (studentPrice1 == ""){
-      Bert.alert("Enter price first!", 'danger')
+      Bert.alert("Please enter all required details!", 'danger')
+    } else if ( this.state.selectedOptionStudent == "Select student"){
+      Bert.alert("Please enter all required details!", 'danger')
     } else {
     event.preventDefault();
 
@@ -46,8 +48,8 @@ class StoreInput extends Component {
     Meteor.call('stores.insert', studentName, studentPrice);
 
     // Clear form
- ReactDOM.findDOMNode(this.refs.studentPrice).value = '';
-}}
+    ReactDOM.findDOMNode(this.refs.studentPrice).value = '';
+  }}
 
   toggleHideCompleted() {
     this.setState({

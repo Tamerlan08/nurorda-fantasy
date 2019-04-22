@@ -36,20 +36,18 @@ export default class Team extends Component {
               <td>{this.props.team.teamName}</td>
               <td>{this.props.team.teamLeader}</td>
               <td>
+              <p className="title">{this.props.team.score}</p>
               <Button bsStyle="success" bsSize="xsmall" className="minus1" onClick={this.addMinus.bind(this)}>
               <span className="glyphicon glyphicon-minus"></span>
               </Button>
-              <span> </span>
-              {this.props.team.score}
-              <span> </span>
               <Button bsStyle="success" bsSize="xsmall" className="plus1" onClick={this.addPlus.bind(this)}>
               <span className="glyphicon glyphicon-plus"></span>
               </Button>
               </td>
               <td>
-               <Button bsStyle="danger" className="delete" onClick={this.deleteThisTeam.bind(this)}>
+              <Button bsStyle="danger" className="delete" onClick={this.deleteThisTeam.bind(this)}>
                   &times;
-                </Button>
+              </Button>
               </td>
             </tr>
     );
