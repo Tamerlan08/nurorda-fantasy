@@ -84,7 +84,7 @@ const Index = () => (
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="https://mail.google.com/mail/u/0?ui=2&ik=b10d7f64c6&attid=0.1&permmsgid=msg-f:1630421129072572660&th=16a06b60e8a978f4&view=fimg&sz=s0-l75-ft&attbid=ANGjdJ-OTrYb1MOrBbDtx_LI9i2Q5B16CZgKnCczs4Ypou61JyIWzqmBi40_KmvXZW_RXd0QlAYSXmrxu8yb9_HNqyFiMrb0Wo-gTILYeppBfkPoAxBhFLg4vjCro4M&disp=emb&realattid=16a06b5a9e17f611d2e14"
+      src="https://i.imgur.com/x5SixnD.jpg"
       alt="First slide"
     />
     <Carousel.Caption>
@@ -95,7 +95,7 @@ const Index = () => (
   <Carousel.Item>
     <img
       className="d-block w-100"
-      src="https://mail.google.com/mail/u/0?ui=2&ik=b10d7f64c6&attid=0.2&permmsgid=msg-f:1630421129072572660&th=16a06b60e8a978f4&view=fimg&sz=s0-l75-ft&attbid=ANGjdJ9Yt9wG-Fo9pLq5g8hf13qZmKm1TJ4OR-KPLMlSdWKbwIWgJbCRLMMeVckd6P7Lpy3ppHzIcu0iorSJKX14p7-qBm2ETHvVfXfGnwD2W9Gh9RZDXBtkkPCNZEQ&disp=emb&realattid=16a06b5b7cb1b1b092d2"
+      src="https://i.imgur.com/9TCgiQM.jpg"
       alt="Second slide"
     />
 
