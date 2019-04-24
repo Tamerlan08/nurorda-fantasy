@@ -17,7 +17,6 @@ const documentsSeed = userId => ({
 });
 
 seeder(Meteor.users, {
-  environments: ['development', 'staging'],
   noLimit: true,
   data: [{
     email: 'admin@admin.com',
