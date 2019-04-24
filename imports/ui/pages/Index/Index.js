@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Carousel } from 'react-bootstrap';
 import styled from 'styled-components';
+import { LinkContainer } from 'react-router-bootstrap';
 import { lighten, darken } from 'polished';
 
 const StyledIndex = styled.div`
@@ -9,7 +10,15 @@ const StyledIndex = styled.div`
   border-radius: 3px;
   color: #fff;
 
-
+  .buttons{
+    display: block;
+  }
+  .signupbutton{
+    width: 20%;
+  }
+  .loginbutton{
+    width: 20%;
+  }
   .indexh1 {
     font-size: 48px;
     color: #ed3137;
@@ -98,11 +107,20 @@ const Index = () => (
     <h1 className="indexh1">Nurorda Fantasy</h1>
     <p className="indexp">Football fantasy of Nurorda</p>
     <br></br>
-    <div>
+    <div className="buttons">
       <Button href="https://www.nurorda.kz/">School page</Button>
       <Button href="https://goo.gl/forms/M14nQzVXHcDw3n7D2"><i className="fa fa-star"/> Leave a feedback!</Button>
     </div>
-
+    <hr></hr>
+    <div className="buttons">
+    <LinkContainer to="/signup">
+      <Button bsStyle="info" href="/signup">Sign Up</Button>
+    </LinkContainer>
+    <LinkContainer to="/login">
+      <Button bsStyle="info" href="/login">Log In</Button>
+    </LinkContainer>
+    </div>
+    <hr></hr>
   </StyledIndex>
 );
 
