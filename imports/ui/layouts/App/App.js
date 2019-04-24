@@ -23,7 +23,6 @@ import Matches from '../../pages/teamList/matchInput.js';
 import Students from '../../pages/teamList/studentInput.js';
 import Store from '../../pages/teamList/storeInput.js';
 import MyTeam from '../../pages/teamList/playerInput.js';
-import SelectTeam from '../../pages/teamList/UsersTeam.js';
 
 import TeamsPublic from '../../pages/teamList/teamInputPublic.js';
 import MatchesPublic from '../../pages/teamList/matchInputPublic.js';
@@ -109,7 +108,6 @@ class App extends React.Component {
         <Grid>
           <Switch>
             <Route exact name="index" path="/" component={Index} />
-            <Authenticated exact path="/teamselect" component={SelectTeam} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authenticated exact path="/my-page" component={UserPage} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authenticated exact path="/rating" component={TeamsPublic} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authenticated exact path="/matches" component={MatchesPublic} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
