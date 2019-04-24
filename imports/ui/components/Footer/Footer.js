@@ -59,7 +59,7 @@ const copyrightYear = () => {
 const Footer = () => (
   <StyledFooter>
     <Grid>
-      <p className="pull-left">&copy; {copyrightYear()} {productName}</p>
+      <p className="pull-left">&copy; 2018-2019 Nurorda Fantasy</p>
     </Grid>
   </StyledFooter>
 );
