@@ -45,24 +45,6 @@ const StyledProfile = styled.div`
 
     .btn {
       margin-top: 20px;
-
-      &.btn-facebook {
-        background: var(--facebook);
-        border-color: var(--facebook);
-        color: #fff;
-      }
-
-      &.btn-google {
-        background: var(--google);
-        border-color: var(--google);
-        color: #fff;
-      }
-
-      &.btn-github {
-        background: var(--github);
-        border-color: var(--github);
-        color: #fff;
-      }
     }
   }
 
@@ -185,27 +167,6 @@ class Profile extends React.Component {
         }
       });
     }
-  }
-
-  renderOAuthUser(loading, user) {
-    return !loading ? (
-      <div className="OAuthProfile">
-        <div key={user.service} className={`LoggedInWith ${user.service}`}>
-          <img src={`/${user.service}.svg`} alt={user.service} />
-          <p>{`You're logged in with ${_.capitalize(user.service)} using the email address ${user.emails[0].address}.`}</p>
-          <Button
-            className={`btn btn-${user.service}`}
-            href={{
-              facebook: 'https://www.facebook.com/settings',
-              google: 'https://myaccount.google.com/privacy#personalinfo',
-              github: 'https://github.com/settings/profile',
-            }[user.service]}
-            target="_blank"
-          >
-            Edit Profile on {_.capitalize(user.service)}
-          </Button>
-        </div>
-      </div>) : <div />;
   }
 
   renderPasswordUser(loading, user) {

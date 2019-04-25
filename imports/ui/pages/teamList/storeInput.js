@@ -7,12 +7,12 @@ import { Button , Grid, Row, Col, Clearfix} from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Navigation from '../../components/Navigation/Navigation';
 import Select from 'react-select';
-import StudentInput from './studentInput.js'
 import { Students } from '../../../api/students.js';
 import Student from './Student.js';
 import { Stores } from '../../../api/stores.js';
 import Store from './Store.js';
-import PlayerInput from './playerInput.js'
+import PlayerInput from './playerInput.js';
+import StudentInput from './studentInput.js';
 import { Players } from '../../../api/players.js';
 import getUserProfile from '../../../modules/get-user-profile';
 
@@ -51,38 +51,114 @@ class StoreInput extends Component {
     ReactDOM.findDOMNode(this.refs.studentPrice).value = '';
   }}
 
-  toggleHideCompleted() {
-    this.setState({
-      hideCompleted: !this.state.hideCompleted,
-    });
-  }
-
   renderStores() {
-    const playerid = this.props.players.map ((player) => player.studentid)
-    let filteredStores = this.props.stores;
-    if (this.state.hideCompleted) {
-      filteredStores = filteredStores.filter(store => !Store.checked);
-    }
-    return filteredStores.map((store) => {
-      const currentUserId = this.props.currentUser && this.props.currentUser._id;
-      const showPrivateButton = store.owner === currentUserId;
+    let stores = this.props.stores;
+    console.log(stores);
+    // if (this.state.hideCompleted) {
+    //   filteredStores = filteredStores.filter(store => !Store.checked);
+    // }
+    // return filteredStores.map((store) => {
+    //   const currentUserId = this.props.currentUser && this.props.currentUser._id;
+    //   const showPrivateButton = store.owner === currentUserId;
 
-      return (
-        <Store
-          key={store._id}
-          store={store}
-          user={this.props.user}
-          player={this.props.player}
-          players={this.props.players}
-          showPrivateButton={showPrivateButton}
-        />
-      );
+        // <Store
+        //   key={store._id}
+        //   store={store}
+        //   user={this.props.user}
+        //   player={this.props.player}
+        //   players={this.props.players}
+        //   showPrivateButton={showPrivateButton}
+        // />
+      return stores.map((store) => {
+        <div>
+          <center>
+            <p>Players Name: <strong>{store.studentName}</strong></p>
+            <p>Players Price: <strong>{store.studentPrice}M</strong></p>
+            <p>
+            <Button bsStyle="success" className="BuyButton" onClick={this.buyPlayer.bind(this)} disabled>
+            Buy
+            </Button>
+            <Button bsStyle="danger" className="SellButton" onClick={this.sellPlayer.bind(this)} disabled>
+            Sell
+            </Button>
+            </p>
+            <hr></hr>
+            <p>Options to Modify</p>
+            <p>
+
+            <Button bsStyle="danger" className="delete" onClick={this.deleteThisStore.bind(this)}>
+              DELETE
+            </Button>
+            </p>
+            <p>
+            <Button bsStyle="info" bsSize="xsmall" onClick={this.minus10M.bind(this)}>
+            -10M
+            </Button>
+            <Button bsStyle="info" bsSize="xsmall" onClick={this.minus1M.bind(this)}>
+            -1M
+            </Button>
+            <Button bsStyle="info" bsSize="xsmall" onClick={this.plus1M.bind(this)}>
+            +1M
+            </Button>
+            <Button bsStyle="info" bsSize="xsmall" onClick={this.plus10M.bind(this)}>
+            +10M
+            </Button>
+            </p>
+          </center>
+        </div>
+      })
+
+    // });
+  }
+  //
+  // handleChange = (selectedOption) => {
+  //   this.setState({ selectedOption });
+  //   console.log(`Option selected:`, selectedOption);
+  // }
+
+  deleteThisStore() {
+    Meteor.call('stores.remove', this.props.store._id);
+  }
+  plus10M(){
+    Meteor.call('stores.plus10M', this.props.store._id);
+  }
+  minus10M(){
+    Meteor.call('stores.minus10M', this.props.store._id);
+  }
+  plus1M(){
+    Meteor.call('stores.plus1M', this.props.store._id);
+  }
+  minus1M(){
+    Meteor.call('stores.minus1M', this.props.store._id);
+  }
+  buyPlayer(event){
+    const toBuyPlayer = event;
+    console.log(toBuyPlayer);
+    const players = Players.find({owner: this.props.user._id}).fetch();
+    const playerid = players.map((player) => {
+      if (player.studentid = toBuyPlayer) {
+          Bert.alert("Player is already in your team!", 'danger');
+      }
+      else {
+        if (this.props.user.defaultMoney >= this.props.store.studentPrice) {
+        // Meteor.call('stores.transfer-testbuy', this.props.store._id, this.props.user._id);
+        event.preventDefault();
+        // Find the text field via the React ref
+        const studentid = this.props.store._id
+        const studentPrice = this.props.store.studentPrice;
+        const studentName = this.props.store.studentName;
+        // const studentSurname = this.props.store.studentSurname;
+        Meteor.call('players.insert', studentid, studentName, studentPrice);
+        Bert.alert("Check player in your team!", 'success')
+        } else {
+        Bert.alert('You dont have enough money! Try selling your players to buy this one.', 'danger')
+        }
+      }
     });
   }
 
-  handleChange = (selectedOption) => {
-    this.setState({ selectedOption });
-    console.log(`Option selected:`, selectedOption);
+  sellPlayer(){
+    Bert.alert('You can not sell this player!', 'danger')
   }
 
   render() {
@@ -90,7 +166,8 @@ class StoreInput extends Component {
     const playerid = this.props.players.map ((player) => player.studentid)
     const {selectedOption} = this.state;
     const { user } = this.props;
-
+    let stores = this.props.stores;
+    // console.log(stores);
 
     return (
       <div>
@@ -101,39 +178,44 @@ class StoreInput extends Component {
               <div className="StoreMain">
                 <center>
                 <h2>Transfer Market</h2>
-                <h4>Balance available: <Badge>Not Available</Badge></h4>
-              <div>
-              <ButtonGroup justified className="StoreStudent">
-                <DropdownButton className="dropdown-studentPrice"
-                  title={this.state.selectedOptionStudent}
-                  id="document-type"
-                  onSelect={this.handleSelectStudent.bind(this)}>
-                   {students.map((student, i) => (
-                   <MenuItem key={i} eventKey={i}>
-                     {student}
-                   </MenuItem>))}
-                </DropdownButton>
-              </ButtonGroup>
-              <p></p>
-              <form>
-                 <input className="input-studentPrice"
-                   type="number"
-                   min={0}
-                   ref="studentPrice"
-                   placeholder="Student Price"
-                   align="left"
-                   />
-              </form>
-              </div>
-
-                    <p></p>
-                    <Button bsStyle="warning" className="dropdown-submit-button" onClick={this.OnehandleSubmit.bind(this)}>Confirm & Submit</Button>
+                <h4>Players in your team: <Badge>{this.props.user.players}</Badge></h4>
+                <h4>Balance available: <Badge>{this.props.user.defaultMoney}</Badge></h4>
+                {
+                  Roles.userIsInRole(this.props.userId, 'admin') ?
+                  (<div>
+                  <ButtonGroup justified className="StoreStudent">
+                    <DropdownButton className="dropdown-studentPrice"
+                      title={this.state.selectedOptionStudent}
+                      id="document-type"
+                      onSelect={this.handleSelectStudent.bind(this)}>
+                       {students.map((student, i) => (
+                       <MenuItem key={i} eventKey={i}>
+                         {student}
+                       </MenuItem>))}
+                    </DropdownButton>
+                  </ButtonGroup>
+                  <p></p>
+                  <form>
+                     <input className="input-studentPrice"
+                       type="number"
+                       min={0}
+                       ref="studentPrice"
+                       placeholder="Student Price"
+                       align="left"
+                       />
+                  </form>
+                  <Button bsStyle="warning" className="dropdown-submit-button" onClick={this.OnehandleSubmit.bind(this)}>Confirm & Submit</Button>
+                  </div>
+                  ) : ""
+                }
                 </center>
                 <p></p>
               </div> : '' }
             <p></p>
             <div className="DIV-studentPrice">
-              {this.renderStores()}
+              {
+                this.renderStores()
+              }
             </div>
           </Col>
         </Row>
