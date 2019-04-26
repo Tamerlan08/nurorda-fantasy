@@ -50,6 +50,41 @@ Meteor.methods({
       handleMethodException(exception);
     }
   },
+  'admin.fetchUsersPublic': function adminFetchUsers(options) { // eslint-disable-line
+    check(options, Match.Maybe(Object));
+
+    try {
+        const skip = ((options.currentPage * options.perPage) - options.perPage);
+        const searchRegex = options.search ? new RegExp(options.search, 'i') : null;
+        const sort = {
+          'rating': -1,
+          'profile.name.last': -1,
+        };
+
+        return {
+          total: Meteor.users.find({ _id: { $ne: this.userId } }).count(),
+          users: options.search ? fetchUsers({
+            _id: { $ne: this.userId },
+            $or: [
+              { 'profile.name.first': searchRegex },
+              { 'profile.name.last': searchRegex },
+              { 'emails.address': searchRegex },
+              { 'services.facebook.first_name': searchRegex },
+              { 'services.facebook.last_name': searchRegex },
+              { 'services.facebook.email': searchRegex },
+              { 'services.google.name': searchRegex },
+              { 'services.google.email': searchRegex },
+              { 'services.github.email': searchRegex },
+              { 'services.github.username': searchRegex },
+            ],
+          }, { sort }) : fetchUsers({ _id: { $ne: this.userId } }, { limit: options.perPage, skip, sort }),
+        };
+
+      throw new Meteor.Error('403', 'Sorry, you need to be an administrator to do this.');
+    } catch (exception) {
+      handleMethodException(exception);
+    }
+  },
   'admin.createUser': function adminCreateUser(user) { // eslint-disable-line
     check(user, {
       _id: Match.Optional(String),

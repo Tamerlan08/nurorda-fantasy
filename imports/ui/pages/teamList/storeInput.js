@@ -65,7 +65,7 @@ class StoreInput extends Component {
             <Button bsStyle="success" className="BuyButton" onClick={this.buyPlayer.bind(this)} disabled>
             Buy
             </Button>
-            <Button bsStyle="danger" className="SellButton" onClick={this.sellPlayer.bind(this)} disabled>
+            <Button bsStyle="danger" className="SellButton" disabled>
             Sell
             </Button>
             </p>

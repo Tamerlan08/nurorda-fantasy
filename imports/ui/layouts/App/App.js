@@ -23,8 +23,7 @@ import Matches from '../../pages/teamList/matchInput.js';
 import Students from '../../pages/teamList/studentInput.js';
 import Store from '../../pages/teamList/storeInput.js';
 import MyTeam from '../../pages/teamList/playerInput.js';
-import UserRating from '../../pages/teamList/userRating.js'
-import UserRating2 from '../../pages/teamList/userRating2.js'
+import UserRating from '../../pages/teamList/userRating.js';
 
 import TeamsPublic from '../../pages/teamList/teamInputPublic.js';
 import MatchesPublic from '../../pages/teamList/matchInputPublic.js';
@@ -117,7 +116,6 @@ class App extends React.Component {
             <Authenticated exact path="/myteam" component={MyTeamPublic} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authenticated exact path="/profile" component={Profile} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authenticated exact path="/myteamtable" component={MyTeamTable} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
-            <Authenticated exact path="/user-rating2" component={UserRating2} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Public path="/signup" component={Signup} {...props} {...state} />
             <Public path="/login" component={Login} {...props} {...state} />
             <Route path="/logout" render={routeProps => <Logout {...routeProps} setAfterLoginPath={setAfterLoginPath} />} {...props} {...state} />
