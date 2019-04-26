@@ -13,6 +13,7 @@ Accounts.onCreateUser((options, user) => {
   userToCreate.roles = ['user']; // Set default roles for new sign ups.
   userToCreate.defaultMoney = 100;
   userToCreate.players = 0;
+  userToCreate.rating = 0;
 
   // Add a default settings array for new sign ups (https://cleverbeagle.com/pup/v1/accounts/settings).
   const settings = UserSettings.find().fetch();
