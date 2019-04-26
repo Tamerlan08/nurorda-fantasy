@@ -31,6 +31,7 @@ class Store extends Component {
   minus1M(){
     Meteor.call('stores.minus1M', this.props.store._id);
   }
+  
   buyPlayer(){
     const players = Players.find({owner: this.props.user._id}).fetch();
     console.log(players)
@@ -54,20 +55,7 @@ class Store extends Component {
     Bert.alert('You dont have enough money! Try selling your players to buy this one.', 'danger')
     }
   }}
-  buyPlayer2(){
-    const playerid = players.map ((player) => player.studentid);
-    if ( playerid.includes(storeid) ){
-      Bert.alert("Player is already in your team!", 'danger')
-    } else {
-      Meteor.call('stores.buy', this.props.store._id, this.props.user._id);
-      event.preventDefault();
-      const studentid = this.props.store._id
-      const studentPrice = this.props.store.studentPrice;
-      const studentName = this.props.store.studentName;
-      Meteor.call('players.insert', studentid, studentName, studentPrice);
-      Bert.alert("Check player in your team!", 'success')
-    }
-  }
+
   sellPlayer(){
     Bert.alert('You can not sell this player!', 'danger')
   }

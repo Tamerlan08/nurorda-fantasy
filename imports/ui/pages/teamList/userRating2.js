@@ -12,7 +12,7 @@ import AdminUserProfile from '../../components/AdminUserProfile/AdminUserProfile
 import UserSettings from '../../components/UserSettings/UserSettings';
 import getUserProfile from '../../../modules/get-user-profile';
 
-const AdminUserHeader = styled.h4`
+const UserRating2 = styled.h4`
   .label {
     position: relative;
     top: -2px;
@@ -94,4 +94,4 @@ export default withTracker(({ match }) => {
   }
 
   return {};
-})(AdminUser);
+})(UserRating2);

@@ -23,6 +23,8 @@ import Matches from '../../pages/teamList/matchInput.js';
 import Students from '../../pages/teamList/studentInput.js';
 import Store from '../../pages/teamList/storeInput.js';
 import MyTeam from '../../pages/teamList/playerInput.js';
+import UserRating from '../../pages/teamList/userRating.js'
+import UserRating2 from '../../pages/teamList/userRating2.js'
 
 import TeamsPublic from '../../pages/teamList/teamInputPublic.js';
 import MatchesPublic from '../../pages/teamList/matchInputPublic.js';
@@ -107,6 +109,7 @@ class App extends React.Component {
           <Switch>
             <Route exact name="index" path="/" component={Index} />
             <Authenticated exact path="/my-page" component={UserPage} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
+            <Authenticated exact path="/user-rating" component={UserRating} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authenticated exact path="/rating" component={TeamsPublic} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authenticated exact path="/matches" component={MatchesPublic} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authenticated exact path="/players" component={StudentsPublic} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
@@ -114,11 +117,7 @@ class App extends React.Component {
             <Authenticated exact path="/myteam" component={MyTeamPublic} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authenticated exact path="/profile" component={Profile} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Authenticated exact path="/myteamtable" component={MyTeamTable} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
-            <Authenticated exact path="/ratingadmin" component={Teams} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
-            <Authenticated exact path="/matchesadmin" component={Matches} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
-            <Authenticated exact path="/playersadmin" component={Students} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
-            <Authenticated exact path="/storeadmin" component={Store} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
-            <Authenticated exact path="/myteamadmin" component={MyTeam} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
+            <Authenticated exact path="/user-rating2" component={UserRating2} setAfterLoginPath={setAfterLoginPath} {...props} {...state} />
             <Public path="/signup" component={Signup} {...props} {...state} />
             <Public path="/login" component={Login} {...props} {...state} />
             <Route path="/logout" render={routeProps => <Logout {...routeProps} setAfterLoginPath={setAfterLoginPath} />} {...props} {...state} />
