@@ -11,7 +11,7 @@ const StyledIndex = styled.div`
   color: #fff;
 
   .buttons{
-    display: block;
+    display: none;
   }
   .signupbutton{
     width: 20%;
@@ -91,6 +91,9 @@ const StyledIndex = styled.div`
     }
     .nextmatchindex{
       width: 100%;
+    }
+    .buttons {
+        display: block;
     }
   }
 `;

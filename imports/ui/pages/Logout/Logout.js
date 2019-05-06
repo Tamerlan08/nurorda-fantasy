@@ -24,7 +24,7 @@ const StyledLogout = styled.div`
   p {
     font-size: 16px;
     line-height: 22px;
-    color: ${lighten(0.25, '#4285F4')};
+    color: #1c5393;
   }
 
   ul {
