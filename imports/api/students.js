@@ -41,7 +41,7 @@ Meteor.methods({
       isAvailable5: false,
       isAvailable6: false,
       averageNumber: 0,
-      average: 0,
+      average: parseFloat(0.00),
       score: 0,
       scoreSecond: 0,
       scoreThird: 0,
@@ -100,6 +100,9 @@ Meteor.methods({
       student.isAvailable1 = 1;
     }
     student.averageNumber = student.isAvailable1 + student.isAvailable2 + student.isAvailable3 + student.isAvailable4 + student.isAvailable5 + student.isAvailable6;
+    if(student.averageNumber == 0){
+      student.averageNumber = 1;
+    }
     console.log("Average Number:", student.averageNumber)
     Students.update(studentId , { $set: { averageNumber:student.averageNumber }});
   },

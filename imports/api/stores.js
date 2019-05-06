@@ -30,6 +30,7 @@ Meteor.methods({
     Stores.insert({
       studentName,
       studentPrice: parseFloat(studentPrice),
+      counter: 0,
       createdAt: new Date(),
       username: Meteor.users.findOne(this.userId).username,
     });
@@ -39,9 +40,37 @@ Meteor.methods({
     check(userId, String);
     const store = Stores.findOne(storeId);
     const user = Meteor.users.findOne({ _id: userId });
-    user.defaultMoney = user.defaultMoney - store.studentPrice,
-    Meteor.users.update(userId, { $set: {defaultMoney: user.defaultMoney} });
+
+
+    if (user.players >= 6) {
+      throw new Meteor.Error('You have reached the limit of players!');
+    }
+    else {
+      user.defaultMoney = user.defaultMoney - store.studentPrice;
+      user.players +=1;
+      Meteor.users.update(userId, { $set: {defaultMoney: user.defaultMoney, players: user.players} });
+    }
   },
+  'stores.buy'(storeId, userId) {
+    check(storeId, String);
+    check(userId, String);
+    const store = Stores.findOne(storeId);
+    const user = Meteor.users.findOne({ _id: userId });
+    if (user.players >= 6){
+      Bert.alert("You have reached the limit of players!", 'danger');
+      return 0;
+    } else if (store.studentPrice > user.defaultMoney) {
+      Bert.alert("You dont have enough money!", 'danger');
+      return 0;
+    } else {
+      user.defaultMoney -= store.studentPrice;
+      user.players += 1;
+      Meteor.users.update(userId, { $set: {defaultMoney: user.defaultMoney, players: user.players} });
+      return 1;
+    }
+  },
+
+
   'stores.plus1M'(storeId) {
     check(storeId , String)
     const store = Stores.findOne(storeId);

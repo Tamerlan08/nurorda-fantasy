@@ -16,37 +16,32 @@ const AuthenticatedNavigation = ({ name, history, userId }) => (
       <LinkContainer to="/rating">
         <NavItem eventKey={2} href="/rating">Rating</NavItem>
       </LinkContainer> : ''}
-      {!Roles.userIsInRole(userId, 'admin') ?
-      <LinkContainer to="/matches">
-        <NavItem eventKey={3} href="/matches">Matches</NavItem>
-      </LinkContainer> : ''}
-      {!Roles.userIsInRole(userId, 'admin') ?
-      <LinkContainer to="/players">
-        <NavItem eventKey={4} href="/players">Players</NavItem>
-      </LinkContainer> : ''}
-      {!Roles.userIsInRole(userId, 'admin') ?
-      <LinkContainer to="/store">
-        <NavItem eventKey={5} href="/store">Transfer Market</NavItem>
-      </LinkContainer> : ''}
-      {!Roles.userIsInRole(userId, 'admin') ?
-      <LinkContainer to="/myteam">
-        <NavItem eventKey={6} href="/myteam">My Team</NavItem>
-      </LinkContainer>: ''}
       {Roles.userIsInRole(userId, 'admin') ?
       <LinkContainer to="/rating-admin">
         <NavItem eventKey={2.1} href="/rating-admin">Rating</NavItem>
+      </LinkContainer> : ''}
+      {!Roles.userIsInRole(userId, 'admin') ?
+      <LinkContainer to="/matches">
+        <NavItem eventKey={3} href="/matches">Matches</NavItem>
       </LinkContainer> : ''}
       {Roles.userIsInRole(userId, 'admin') ?
       <LinkContainer to="/matches-admin">
         <NavItem eventKey={3.1} href="/matches-admin">Matches</NavItem>
       </LinkContainer> : ''}
+      {!Roles.userIsInRole(userId, 'admin') ?
+      <LinkContainer to="/players">
+        <NavItem eventKey={4} href="/players">Players</NavItem>
+      </LinkContainer> : ''}
       {Roles.userIsInRole(userId, 'admin') ?
       <LinkContainer to="/players-admin">
         <NavItem eventKey={4.1} href="/players-admin">Players</NavItem>
       </LinkContainer>: ''}
-      {Roles.userIsInRole(userId, 'admin') ?
-      <LinkContainer to="/store-admin">
-        <NavItem eventKey={5.1} href="/store-admin">Transfer Market</NavItem>
+      <LinkContainer to="/store">
+        <NavItem eventKey={5} href="/store">Transfer Market</NavItem>
+      </LinkContainer>
+      {!Roles.userIsInRole(userId, 'admin') ?
+      <LinkContainer to="/myteam">
+        <NavItem eventKey={6} href="/myteam">My Team</NavItem>
       </LinkContainer>: ''}
       {Roles.userIsInRole(userId, 'admin') ?
       <LinkContainer to="/myteam-admin">

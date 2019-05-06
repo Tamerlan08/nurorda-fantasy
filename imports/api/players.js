@@ -50,10 +50,11 @@ Meteor.methods({
     Players.update(playerId, { $set: { checked: setChecked } });
   },
   'players.sell'(playerId, userId){
-    const user = Meteor.users.findOne();
-    const player = Players.findOne();
-    user.defaultMoney = user.defaultMoney + player.studentPrice,
-    Meteor.users.update(userId, { $set: {defaultMoney: user.defaultMoney} });
+    const user = Meteor.users.findOne(userId);
+    const player = Players.findOne(playerId);
+    user.defaultMoney += player.studentPrice,
+    user.players -= 1;
+    Meteor.users.update(userId, { $set: {defaultMoney: user.defaultMoney, players: user.players} });
   },
   'players.setPrivate'(playerId, setToPrivate) {
     check(playerId, String);

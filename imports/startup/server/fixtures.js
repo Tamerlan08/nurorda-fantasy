@@ -1,10 +1,10 @@
 import seeder from '@cleverbeagle/seeder';
 import { Meteor } from 'meteor/meteor';
 import Documents from '../../api/Documents/Documents';
+import { Roles } from 'meteor/alanning:roles';
 
 const documentsSeed = userId => ({
   collection: Documents,
-  environments: ['development', 'staging'],
   noLimit: true,
   modelCount: 0,
   model(dataIndex) {

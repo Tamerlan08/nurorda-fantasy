@@ -52,7 +52,7 @@ class AdminUser extends React.Component {
     return !loading && user ? (
       <div className="AdminUser">
         <Breadcrumb>
-          
+
           <Breadcrumb.Item active>{user && user.profile ? `${user.profile.name.first} ${user.profile.name.last}` : user.username}</Breadcrumb.Item>
         </Breadcrumb>
         <AdminUserHeader className="page-header">

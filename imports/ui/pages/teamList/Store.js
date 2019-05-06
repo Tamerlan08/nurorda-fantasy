@@ -31,12 +31,16 @@ class Store extends Component {
   minus1M(){
     Meteor.call('stores.minus1M', this.props.store._id);
   }
+  
   buyPlayer(){
-    const playerid = this.props.players.map ((player) => player.studentid)
+    const players = Players.find({owner: this.props.user._id}).fetch();
+    console.log(players)
+    const playerid = players.map ((player) => player.studentid);
     const storeid = this.props.store._id
     if ( playerid.includes(storeid) ){
       Bert.alert("Player is already in your team!", 'danger')
-    } else {
+    }
+    else {
     if (this.props.user.defaultMoney >= this.props.store.studentPrice) {
     Meteor.call('stores.transfer-testbuy', this.props.store._id, this.props.user._id);
     event.preventDefault();
@@ -51,15 +55,12 @@ class Store extends Component {
     Bert.alert('You dont have enough money! Try selling your players to buy this one.', 'danger')
     }
   }}
+
   sellPlayer(){
     Bert.alert('You can not sell this player!', 'danger')
   }
-  function(){
-    const playerid = this.props.players.map ((player) => player.studentid)
-  }
 
   render() {
-    const playerid = this.props.players.map ((player) => player.studentid)
     return (
             <div className="studentPrice-2ndDIV">
               <center>
@@ -76,6 +77,7 @@ class Store extends Component {
                 <hr></hr>
                 <p>Options to Modify</p>
                 <p>
+
                 <Button bsStyle="danger" className="delete" onClick={this.deleteThisStore.bind(this)}>
                   DELETE
                 </Button>
