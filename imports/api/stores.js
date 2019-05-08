@@ -65,7 +65,8 @@ Meteor.methods({
     } else {
       user.defaultMoney -= store.studentPrice;
       user.players += 1;
-      Meteor.users.update(userId, { $set: {defaultMoney: user.defaultMoney, players: user.players} });
+      user.playerNames.push(store.studentName);
+      Meteor.users.update(userId, { $set: {defaultMoney: user.defaultMoney, players: user.players, playerNames: user.playerNames} });
       return 1;
     }
   },

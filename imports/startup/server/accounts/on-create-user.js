@@ -12,6 +12,7 @@ Accounts.onCreateUser((options, user) => {
 
   userToCreate.roles = ['user']; // Set default roles for new sign ups.
   userToCreate.defaultMoney = 100;
+  userToCreate.playerNames = [];
   userToCreate.players = 0;
   userToCreate.rating = 0;
 

@@ -3,14 +3,16 @@
 import React from 'react';
 import autoBind from 'react-autobind';
 import { Link } from 'react-router-dom';
-import { ListGroup, ListGroupItem } from 'react-bootstrap';
+import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
 import SearchInput from '../../components/SearchInput/SearchInput';
 import delay from '../../../modules/delay';
+import { Roles } from 'meteor/alanning:roles';
+import getUserProfile from '../../../modules/get-user-profile';
 
-const AdminUsersHeader = styled.div`
+const UserRatingHeader = styled.div`
   h4 span {
     display: inline-block;
     padding: 2px 6px;
@@ -99,7 +101,7 @@ const StyledListGroupItem = styled(ListGroupItem)`
   }
 `;
 
-class AdminUsers extends React.Component {
+class UserRating extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -168,14 +170,14 @@ class AdminUsers extends React.Component {
 
   render() {
     return (
-      <div className="AdminUsers">
-        <AdminUsersHeader className="page-header clearfix">
+      <div className="UserRating">
+        <UserRatingHeader className="page-header clearfix">
           <h4 className="pull-left">User Rating {this.state.total ? <span>{this.state.total} profiles registered</span> : ''}</h4>
           <SearchInput
             placeholder="Search users..."
             onKeyUp={this.handleSearch}
           />
-        </AdminUsersHeader>
+        </UserRatingHeader>
         <StyledListGroup>
           {this.state.users.map(({
             _id, emails, username, profile, service, rating
@@ -191,8 +193,8 @@ class AdminUsers extends React.Component {
   }
 }
 
-AdminUsers.propTypes = {
+UserRating.propTypes = {
   // prop: PropTypes.string.isRequired,
 };
 
-export default AdminUsers;
+export default UserRating;

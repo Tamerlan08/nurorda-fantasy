@@ -62,7 +62,7 @@ Meteor.methods({
         };
 
         return {
-          total: Meteor.users.find({ _id: { $ne: this.userId } }).count(),
+          total: Meteor.users.find().count(),
           users: options.search ? fetchUsers({
             _id: { $ne: this.userId },
             $or: [
@@ -77,13 +77,28 @@ Meteor.methods({
               { 'services.github.email': searchRegex },
               { 'services.github.username': searchRegex },
             ],
-          }, { sort }) : fetchUsers({ _id: { $ne: this.userId } }, { limit: options.perPage, skip, sort }),
+          }, { sort }) : fetchUsers({}, { limit: options.perPage, skip, sort }),
         };
 
       throw new Meteor.Error('403', 'Sorry, you need to be an administrator to do this.');
     } catch (exception) {
       handleMethodException(exception);
     }
+  },
+  'admin.plusRating'(userId){
+    check(userId, String);
+    const user = Meteor.users.findOne(userId);
+    console.log(user);
+    user.rating += 1;
+    Meteor.users.update(userId, { $set: {rating: user.rating} });
+  },
+  'admin.minusRating'(userId){
+    check(userId, String);
+    const user = Meteor.users.findOne(userId);
+    console.log(user);
+
+    user.rating -= 1;
+    Meteor.users.update(userId, { $set: {rating: user.rating} });
   },
   'admin.createUser': function adminCreateUser(user) { // eslint-disable-line
     check(user, {
