@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
-import { Nav, Navbar, NavItem, NavDropdown, MenuItem, Table, DropdownButton, ButtonGroup } from 'react-bootstrap';
-import { Students } from '../../../api/students.js';
 import { Button , Grid, Row, Col, Clearfix} from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import TeamInput from './teamInput.js'
+import { Nav, Navbar, NavItem, NavDropdown, MenuItem, Table, DropdownButton, ButtonGroup } from 'react-bootstrap';
+import { Students } from '../../../api/students.js';
+import { Players } from '../../../api/players.js';
 import { Teams } from '../../../api/teams.js';
+import TeamInput from './teamInput.js'
 import Team from '../../components/Team/Team.js';
 import Student from './Student.js';
 import Navigation from '../../components/Navigation/Navigation';
@@ -63,6 +64,12 @@ import Navigation from '../../components/Navigation/Navigation';
     });
   }
 
+  rating() {
+    const players = Players.find({ owner: this.props.currentUser._id }).fetch();
+    const num = Players.find({ owner: this.props.currentUser._id }).count();
+    Meteor.call('students.userRating', this.props.currentUser._id, players, num);
+  }
+
   renderStudents() {
     let filteredStudents = this.props.students;
     if (this.state.hideCompleted) {
@@ -88,6 +95,7 @@ import Navigation from '../../components/Navigation/Navigation';
     const {selectedOption} = this.state;
     return (
       <div className="StudentGrid">
+      <button onClick={this.rating.bind(this)}>fasfdsafdsa</button>
         <center>
           <h1 className="StudentTitle">Add Player</h1>
             <div className="StudentSurname">
@@ -170,9 +178,11 @@ import Navigation from '../../components/Navigation/Navigation';
 
 export default withTracker(() => {
   Meteor.subscribe('students');
+  Meteor.subscribe('players');
   Meteor.subscribe('teams');
   return {
     students: Students.find({}, { sort: { average: -1 } }).fetch(),
+    players: Players.find({}, { sort: { createdAt: -1 } }).fetch(),
     teams: Teams.find({}, { sort: { createdAt: -1 } }).fetch(),
     incompleteCount: Students.find({ checked: { $ne: false } }).count(),
     currentUser: Meteor.user(),

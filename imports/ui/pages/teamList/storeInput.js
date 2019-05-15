@@ -58,120 +58,111 @@ class StoreInput extends Component {
         return (
           Roles.userIsInRole(this.props.userId, 'admin') ?
           (<div key={store._id}>
-          <center>
+            <div className="studentPrice-2ndDIV">
+              <center>
+              <p>Players Name: <strong>{store.studentName}</strong></p>
+              <p>Players Price: <strong>{store.studentPrice}M</strong></p>
+              <p>
+              <Button bsStyle="success" className="BuyButton" onClick={() => this.buyPlayer(store._id)}>
+              Buy
+              </Button>
+              <Button bsStyle="danger" className="SellButton" disabled>
+              Sell
+              </Button>
+              </p>
+              <hr></hr>
+              <p>Options to Modify</p>
+              <p>
+
+              <Button bsStyle="danger" className="delete" onClick={() => this.deleteThisStore(store._id)}>
+                DELETE
+              </Button>
+              </p>
+              <p>
+              <Button bsStyle="info" bsSize="xsmall" onClick={() => this.minus10M(store._id)}>
+              -10M
+              </Button>
+              <Button bsStyle="info" bsSize="xsmall" onClick={() => this.minus1M(store._id)}>
+              -1M
+              </Button>
+              <Button bsStyle="info" bsSize="xsmall" onClick={() => this.plus1M(store._id)}>
+              +1M
+              </Button>
+              <Button bsStyle="info" bsSize="xsmall" onClick={() => this.plus10M(store._id)}>
+              +10M
+              </Button>
+              </p>
+            </center>
+          </div>
+        </div>) :
+        (<div key={store._id}>
+          <div className="studentPrice-2ndDIV">
+            <center>
             <p>Players Name: <strong>{store.studentName}</strong></p>
             <p>Players Price: <strong>{store.studentPrice}M</strong></p>
             <p>
-            <Button bsStyle="success" className="BuyButton" onClick={this.buyPlayer.bind(this)} disabled>
+            <Button bsStyle="success" className="BuyButton" onClick={() => this.buyPlayer(store._id)}>
             Buy
-            </Button>
-            <Button bsStyle="danger" className="SellButton" disabled>
-            Sell
-            </Button>
-            </p>
-            <hr></hr>
-            <p>Options to Modify</p>
-            <p>
-
-            <Button bsStyle="danger" className="delete" onClick={this.deleteThisStore.bind(this)}>
-              DELETE
-            </Button>
-            </p>
-            <p>
-            <Button bsStyle="info" bsSize="xsmall" onClick={this.minus10M.bind(this)}>
-            -10M
-            </Button>
-            <Button bsStyle="info" bsSize="xsmall" onClick={this.minus1M.bind(this)}>
-            -1M
-            </Button>
-            <Button bsStyle="info" bsSize="xsmall" onClick={this.plus1M.bind(this)}>
-            +1M
-            </Button>
-            <Button bsStyle="info" bsSize="xsmall" onClick={this.plus10M.bind(this)}>
-            +10M
             </Button>
             </p>
           </center>
-        </div>) :
-        (<div key={store._id}>
-        <center>
-          <p>Players Name: <strong>{store.studentName}</strong></p>
-          <p>Players Price: <strong>{store.studentPrice}M</strong></p>
-          <p>
-          <Button bsStyle="success" className="BuyButton" onClick={() => this.buyPlayer(store._id)}>
-          Buy
-          </Button>
-          </p>
-          <hr></hr>
-          <p>Options to Modify</p>
-          <p>
-
-          <Button bsStyle="danger" className="delete" onClick={this.deleteThisStore.bind(this)}>
-            DELETE
-          </Button>
-          </p>
-          <p>
-          <Button bsStyle="info" bsSize="xsmall" onClick={this.minus10M.bind(this)}>
-          -10M
-          </Button>
-          <Button bsStyle="info" bsSize="xsmall" onClick={this.minus1M.bind(this)}>
-          -1M
-          </Button>
-          <Button bsStyle="info" bsSize="xsmall" onClick={this.plus1M.bind(this)}>
-          +1M
-          </Button>
-          <Button bsStyle="info" bsSize="xsmall" onClick={this.plus10M.bind(this)}>
-          +10M
-          </Button>
-          </p>
-        </center>
+        </div>
       </div>)
       )
       })
   }
 
-  deleteThisStore() {
-    Meteor.call('stores.remove', this.props.store._id);
+  deleteThisStore(storeid) {
+    Meteor.call('stores.remove', storeid);
   }
-  plus10M(){
-    Meteor.call('stores.plus10M', this.props.store._id);
+  plus10M(storeid){
+    Meteor.call('stores.plus10M', storeid);
   }
-  minus10M(){
-    Meteor.call('stores.minus10M', this.props.store._id);
+  minus10M(storeid){
+    Meteor.call('stores.minus10M', storeid);
   }
-  plus1M(){
-    Meteor.call('stores.plus1M', this.props.store._id);
+  plus1M(storeid){
+    Meteor.call('stores.plus1M', storeid);
   }
-  minus1M(){
-    Meteor.call('stores.minus1M', this.props.store._id);
+  minus1M(storeid){
+    Meteor.call('stores.minus1M', storeid);
   }
   buyPlayer(toBuyPlayer){
     console.log(toBuyPlayer)
     const store = Stores.findOne(toBuyPlayer);
     const user = getUserProfile(Meteor.users.findOne({ _id: Meteor.userId() }));
     const players = Players.find({owner: Meteor.userId}).fetch();
-    const playerid = players.map((player) => {
-      if (player.studentid === toBuyPlayer) {
-          Bert.alert("Player is already in your team!", 'danger');
+    const playeridmap = players.map((player) => player._id);
+    if (user.players >= 6){
+      Bert.alert("6 is maximal player count in one team")
+    } else {
+    if (playeridmap == ""){
+      if (user.defaultMoney >= store.studentPrice) {
+      Meteor.call('stores.transfer-testbuy', store._id, user._id);
+      event.preventDefault();
+      const studentid = store._id;
+      const studentPrice = store.studentPrice;
+      const studentName = store.studentName;
+      Meteor.call('players.insert', studentid, studentName, studentPrice);
+      Bert.alert("Check player in your team!", 'success')
+      } else {
+        Bert.alert("You dont have enough money!", 'danger')
       }
-      else {
-          console.log("#");
-        if (user.defaultMoney >= store.studentPrice) {
-        Meteor.call('stores.transfer-testbuy', store._id, user._id);
-        event.preventDefault();
-        const studentid = store._id;
-        const studentPrice = store.studentPrice;
-        const studentName = store.studentName;
-
-        Meteor.call('players.insert', studentid, studentName, studentPrice);
-        Bert.alert("Check player in your team!", 'success')
-        }
-        else {
-        Bert.alert('You dont have enough money! Try selling your players to buy this one.', 'danger')
-        }
-      }
-    });
-  }
+    } else if (playeridmap.includes(toBuyPlayer)){
+      Bert.alert("Player is already in your team")
+    } else {
+      if (user.defaultMoney >= store.studentPrice) {
+      Meteor.call('stores.transfer-testbuy', store._id, user._id);
+      event.preventDefault();
+      const studentid = store._id;
+      const studentPrice = store.studentPrice;
+      const studentName = store.studentName;
+      Meteor.call('players.insert', studentid, studentName, studentPrice);
+      Bert.alert("Check player in your team!", 'success')
+    } else {
+      Bert.alert("You dont have enough money!", 'danger')
+    }
+  }}}
 
   render() {
     const students = this.props.students.map ((student) => student.surname + " " + student.name)

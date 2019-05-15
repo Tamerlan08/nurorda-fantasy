@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
+import { Players } from './players.js'
 
 export const Students = new Mongo.Collection('students');
 
@@ -107,6 +108,32 @@ Meteor.methods({
     Students.update(studentId , { $set: { averageNumber:student.averageNumber }});
   },
 
+  'students.userRating'(userId, players, num) {
+    check(userId, String);
+    check(players, Array);
+    check(num, Number);
+    const user = Meteor.users.findOne({ _id: userId });
+    let num2 = 0;
+    const averageNum = num;
+    const students = Students.find().fetch();
+    const playerIds = players.map((player) => player.studentName);
+    const studentIds = students.map((student) => student.surname + " " + student.name);
+    rating = 0;
+    if(num == 0){
+      userrating = 0;
+    } else {
+    while (num-1 >= num2){
+      var array = playerIds[num2].split(" ");
+      const average = Students.findOne({ surname: array[0], name: array[1]}).average;
+      rating += parseFloat(average);
+      num2 += 1;
+    }
+    userrating = rating / averageNum;
+    userrating = userrating.toFixed(2);
+    }
+    Meteor.users.update(userId, { $set: {rating: userrating} });
+  },
+
   'students.averageCalculate'(studentId) {
     check(studentId, String)
     const student = Students.findOne(studentId);
@@ -163,6 +190,7 @@ Meteor.methods({
     Students.update(studentId , { $set: { totalScore:student.totalScore }});
     Students.update(studentId , { $set: { averageScore:student.averageScore }});
   },
+
   'students.addscoreFourth'(studentId) {
     check(studentId, String)
     const student = Students.findOne(studentId);
@@ -186,6 +214,7 @@ Meteor.methods({
     Students.update(studentId , { $set: { totalScore:student.totalScore }});
     Students.update(studentId , { $set: { averageScore:student.averageScore }});
   },
+
   'students.addscoreThird'(studentId) {
     check(studentId, String)
     const student = Students.findOne(studentId);

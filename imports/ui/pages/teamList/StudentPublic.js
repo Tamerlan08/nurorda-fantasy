@@ -26,7 +26,7 @@ export default class Student extends Component {
               <td>{this.props.student.scoreFourth}</td>
               <td>{this.props.student.scoreFifth}</td>
               <td>{this.props.student.scoreSix}</td>
-              <td>{this.props.student.averageScore}</td>
+              <td>{this.props.student.average}</td>
               <td>{this.props.student.totalScore}</td>
             </tr>
     );

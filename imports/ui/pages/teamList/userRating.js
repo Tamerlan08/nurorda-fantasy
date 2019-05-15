@@ -4,6 +4,7 @@ import React from 'react';
 import autoBind from 'react-autobind';
 import { Link } from 'react-router-dom';
 import { ListGroup, ListGroupItem, Button } from 'react-bootstrap';
+import { withTracker } from 'meteor/react-meteor-data';
 import styled from 'styled-components';
 import { Meteor } from 'meteor/meteor';
 import { Bert } from 'meteor/themeteorchef:bert';
@@ -11,6 +12,8 @@ import SearchInput from '../../components/SearchInput/SearchInput';
 import delay from '../../../modules/delay';
 import { Roles } from 'meteor/alanning:roles';
 import getUserProfile from '../../../modules/get-user-profile';
+import { Players } from '../../../api/players.js';
+import { Students } from '../../../api/students.js';
 
 const UserRatingHeader = styled.div`
   h4 span {
@@ -132,6 +135,19 @@ class UserRating extends React.Component {
     });
   }
 
+  myfunction(){
+    const abcdef = this.state.users.map((user) => user._id);
+    const numOfUsers = abcdef.length;
+    let num2 = 0
+    while(numOfUsers-1 >= num2){
+      const userId = abcdef[num2];
+      const players = Players.find({ owner: userId }).fetch();
+      const num = Players.find({ owner: userId }).count();
+      Meteor.call('students.userRating', userId, players, num);
+      num2 += 1;
+    }
+  }
+
   handleSearch(event) {
     event.persist();
     if (event.target.value.trim() !== '') {
@@ -169,8 +185,9 @@ class UserRating extends React.Component {
   }
 
   render() {
+    const style = {}
     return (
-      <div className="UserRating">
+      <div className="UserRating" onLoad={this.myfunction()}>
         <UserRatingHeader className="page-header clearfix">
           <h4 className="pull-left">User Rating {this.state.total ? <span>{this.state.total} profiles registered</span> : ''}</h4>
           <SearchInput
@@ -197,4 +214,13 @@ UserRating.propTypes = {
   // prop: PropTypes.string.isRequired,
 };
 
-export default UserRating;
+export default withTracker(() => {
+  Meteor.subscribe('players');
+  Meteor.subscribe('students');
+  return {
+    players: Players.find({}, { sort: { createdAt: -1 } }).fetch(),
+    students: Students.find({}, { sort: { createdAt: -1 } }).fetch(),
+    currentUser: getUserProfile(Meteor.users.findOne({ _id: Meteor.userId() })),
+  };
+
+})(UserRating);

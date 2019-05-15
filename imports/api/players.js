@@ -55,10 +55,6 @@ Meteor.methods({
     const playerArray = user.playerNames;
     user.defaultMoney += player.studentPrice,
     user.players -= 1;
-    var playerIndex = playerArray.indexOf(player.studentName);
-    if (playerIndex > -1) {
-      playerArray.splice(playerIndex, 1);
-    }
     Meteor.users.update(userId, { $set: {defaultMoney: user.defaultMoney, players: user.players} });
   },
   'players.setPrivate'(playerId, setToPrivate) {
