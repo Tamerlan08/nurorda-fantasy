@@ -8,45 +8,55 @@ import { Roles } from 'meteor/alanning:roles';
 const AuthenticatedNavigation = ({ name, history, userId }) => (
   <div>
     <Nav>
+
       {!Roles.userIsInRole(userId, 'admin') ?
       <LinkContainer to="/my-page">
         <NavItem eventKey={1} href="/my-page">My Page</NavItem>
       </LinkContainer> : ''}
+
+      <LinkContainer to="/user-rating">
+        <NavItem eventKey={1.1} href="/user-rating">Rating</NavItem>
+      </LinkContainer>
+
       {!Roles.userIsInRole(userId, 'admin') ?
-      <LinkContainer to="/rating">
-        <NavItem eventKey={2} href="/rating">Rating</NavItem>
-      </LinkContainer> : ''}
-      {Roles.userIsInRole(userId, 'admin') ?
-      <LinkContainer to="/rating-admin">
-        <NavItem eventKey={2.1} href="/rating-admin">Rating</NavItem>
-      </LinkContainer> : ''}
-      {!Roles.userIsInRole(userId, 'admin') ?
-      <LinkContainer to="/matches">
-        <NavItem eventKey={3} href="/matches">Matches</NavItem>
-      </LinkContainer> : ''}
-      {Roles.userIsInRole(userId, 'admin') ?
-      <LinkContainer to="/matches-admin">
-        <NavItem eventKey={3.1} href="/matches-admin">Matches</NavItem>
-      </LinkContainer> : ''}
+      <LinkContainer to="/teams">
+        <NavItem eventKey={2} href="/teams">Teams</NavItem>
+      </LinkContainer>:
+      <LinkContainer to="/teams-admin">
+        <NavItem eventKey={2.1} href="/teams-admin">Teams</NavItem>
+      </LinkContainer>}
+
       {!Roles.userIsInRole(userId, 'admin') ?
       <LinkContainer to="/players">
-        <NavItem eventKey={4} href="/players">Players</NavItem>
-      </LinkContainer> : ''}
-      {Roles.userIsInRole(userId, 'admin') ?
+        <NavItem eventKey={3} href="/players">Players</NavItem>
+      </LinkContainer>:
       <LinkContainer to="/players-admin">
-        <NavItem eventKey={4.1} href="/players-admin">Players</NavItem>
-      </LinkContainer>: ''}
+        <NavItem eventKey={3.1} href="/players-admin">Players</NavItem>
+      </LinkContainer>}
+
+      {!Roles.userIsInRole(userId, 'admin') ?
+      <LinkContainer to="/matches">
+        <NavItem eventKey={4} href="/matches">Matches</NavItem>
+      </LinkContainer>:
+      <LinkContainer to="/matches-admin">
+        <NavItem eventKey={4.1} href="/matches-admin">Matches</NavItem>
+      </LinkContainer>}
+
+      {!Roles.userIsInRole(userId, 'admin') ?
       <LinkContainer to="/store">
         <NavItem eventKey={5} href="/store">Transfer Market</NavItem>
-      </LinkContainer>
+      </LinkContainer>:
+      <LinkContainer to="/store">
+        <NavItem eventKey={5.1} href="/store">Transfer Market</NavItem>
+      </LinkContainer>}
+
       {!Roles.userIsInRole(userId, 'admin') ?
       <LinkContainer to="/myteam">
-        <NavItem eventKey={6} href="/myteam">My Team</NavItem>
-      </LinkContainer>: ''}
-      {Roles.userIsInRole(userId, 'admin') ?
+        <NavItem eventKey={6} href="/myteam">My Players</NavItem>
+      </LinkContainer>:
       <LinkContainer to="/myteam-admin">
-        <NavItem eventKey={6.1} href="/myteam-admin">My Team</NavItem>
-      </LinkContainer>: ''}
+        <NavItem eventKey={6.1} href="/myteam-admin">My Players</NavItem>
+      </LinkContainer>}
     </Nav>
     <Nav pullRight>
     {!Roles.userIsInRole(userId, 'admin') ?

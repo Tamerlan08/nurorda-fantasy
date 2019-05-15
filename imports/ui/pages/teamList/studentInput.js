@@ -18,6 +18,7 @@ import Navigation from '../../components/Navigation/Navigation';
     super(props);
 
     this.state = {
+      formActive: false,
       hideCompleted: false,
       selectedOptionTeam: "Select team",
     }
@@ -70,6 +71,12 @@ import Navigation from '../../components/Navigation/Navigation';
     Meteor.call('students.userRating', this.props.currentUser._id, players, num);
   }
 
+  displayAdmin(){
+    this.setState({
+      formActive: !this.state.formActive,
+    });
+  }
+
   renderStudents() {
     let filteredStudents = this.props.students;
     if (this.state.hideCompleted) {
@@ -95,83 +102,72 @@ import Navigation from '../../components/Navigation/Navigation';
     const {selectedOption} = this.state;
     return (
       <div className="StudentGrid">
-      <button onClick={this.rating.bind(this)}>fasfdsafdsa</button>
-        <center>
-          <h1 className="StudentTitle">Add Player</h1>
-            <div className="StudentSurname">
-              <form className="Surname">
-                <input className="input-Surname"
-                  type="text"
-                  ref="Surname"
-                  placeholder="Surname"
-                  align="right"
-                />
-              </form>
-            </div>
-            <div className="StudentName">
-              <form className="Name">
-                <input className="input-Name"
-                  type="text"
-                  ref="Name"
-                  placeholder= "Name"
-                  align="middle"
-                />
-              </form>
-            </div>
-            <div className="StudentGrade">
-              <form className="Grade">
-                <input className="input-Grade"
-                  type="text-center"
-                  ref="Grade"
-                  placeholder="Grade"
-                  align="left"
-                />
-              </form>
-            </div>
-            <div className="StudentTeam">
-            <ButtonGroup justified className="StudentTeamDropdown">
-              <DropdownButton
-                title={this.state.selectedOptionTeam}
-                id="document-type"
-                onSelect={this.handleSelect.bind(this)}>
-                  {teams.map((team, i) => (
-                  <MenuItem key={i} eventKey={i}>
-                    {team}
-                  </MenuItem>))}
-                </DropdownButton>
-              </ButtonGroup>
-              </div>
-              <p></p>
-              <div className="StudentSubmit">
-                <Button className="student-submit-button" bsStyle="warning" name="Confirm" onClick={this.handleSubmit.bind(this)}>Confirm & Submit</Button>
-              </div>
-            </center>
-          <p></p>
-          <div className="StudentTable">
-            <Table bordered condensed className="table">
-              <thead>
-                <tr>
-                  <td><strong>Surname</strong></td>
-                  <td><strong>Name</strong></td>
-                  <td><strong>Grade</strong></td>
-                  <td><strong>Team</strong></td>
-                  <td><strong>First Match</strong></td>
-                  <td><strong>Second Match</strong></td>
-                  <td><strong>Third Match</strong></td>
-                  <td><strong>Quarter Final</strong></td>
-                  <td><strong>Semi Final</strong></td>
-                  <td><strong>Final Match</strong></td>
-                  <td><strong>Average</strong></td>
-                  <td><strong>Total Points</strong></td>
-                  <td><strong> EDIT </strong></td>
-                </tr>
-              </thead>
-              <tbody>
-                  {this.renderStudents()}
-              </tbody>
-            </Table>
-          </div>
-    </div>
+        <div className="page-header clearfix">
+          <h4 className="pull-left">Player List {Roles.userIsInRole(this.props.userId, 'admin') ? <span className="headertext" onClick={this.displayAdmin.bind(this)}>Forms</span>:""}</h4>
+        </div>
+        <div className={this.state.formActive ? "display":"hide"}>
+          <form>
+            <input className="form"
+              type="text"
+              ref="Surname"
+              placeholder="Surname"
+              align="right"
+            />
+          </form>
+          <form>
+            <input className="form"
+              type="text"
+              ref="Name"
+              placeholder= "Name"
+              align="middle"
+            />
+          </form>
+          <form>
+            <input className="form"
+              type="text-center"
+              ref="Grade"
+              placeholder="Grade"
+              align="left"
+            />
+          </form>
+        <ButtonGroup justified className="dropdown">
+          <DropdownButton
+            title={this.state.selectedOptionTeam}
+            id="document-type"
+            onSelect={this.handleSelect.bind(this)}>
+              {teams.map((team, i) => (
+              <MenuItem key={i} eventKey={i}>
+                {team}
+              </MenuItem>))}
+            </DropdownButton>
+          </ButtonGroup>
+        <Button className="form" bsStyle="warning" name="Confirm" onClick={this.handleSubmit.bind(this)}>Confirm & Submit</Button>
+        </div>
+        <div className="StudentTable">
+          <Table bordered condensed className="table">
+            <thead>
+              <tr>
+                <td><strong>Surname</strong></td>
+                <td><strong>Name</strong></td>
+                <td><strong>Grade</strong></td>
+                <td><strong>Team</strong></td>
+                <td><strong>First Match</strong></td>
+                <td><strong>Second Match</strong></td>
+                <td><strong>Third Match</strong></td>
+                <td><strong>Quarter Final</strong></td>
+                <td><strong>Semi Final</strong></td>
+                <td><strong>Final Match</strong></td>
+                <td><strong>Average</strong></td>
+                <td><strong>Total Points</strong></td>
+                <td><strong> EDIT </strong></td>
+              </tr>
+            </thead>
+            <tbody>
+                {this.renderStudents()}
+            </tbody>
+          </Table>
+        </div>
+      </div>
     );
   }
 }

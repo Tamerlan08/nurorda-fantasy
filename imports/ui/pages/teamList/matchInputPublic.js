@@ -45,7 +45,9 @@ class MatchInputPublic extends Component {
 
     return (
       <div>
-        <p></p>
+        <div className="page-header clearfix">
+        <h4 className="pull-left">Matches</h4>
+        </div>
           <Table bordered condensed>
             <thead>
               <tr>

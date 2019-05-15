@@ -22,6 +22,7 @@ class StoreInput extends Component {
     super(props);
 
     this.state = {
+      formActive: false,
       hideCompleted: false,
       selectedOptionStudent: "Select student",
     }
@@ -163,6 +164,11 @@ class StoreInput extends Component {
       Bert.alert("You dont have enough money!", 'danger')
     }
   }}}
+  displayAdmin(){
+    this.setState({
+      formActive: !this.state.formActive,
+    });
+  }
 
   render() {
     const students = this.props.students.map ((student) => student.surname + " " + student.name)
@@ -178,15 +184,15 @@ class StoreInput extends Component {
             <Col md={12}>
               { this.props.currentUser ?
               <div className="StoreMain">
-                <center>
-                <h2>Transfer Market</h2>
-                <h4>Players in your team: <Badge>{this.props.user.players}</Badge></h4>
-                <h4>Balance available: <Badge>{this.props.user.defaultMoney}</Badge></h4>
+                <div className="page-header clearfix">
+                <h4 className="pull-left">Transfer Market</h4>
+                <h4 className="pull-left"><span className="headertext">Balance: {this.props.user.defaultMoney}</span> <span className="headertext">Players: {this.props.user.players}</span> {Roles.userIsInRole(this.props.userId, 'admin') ? <span className="headertext" onClick={this.displayAdmin.bind(this)}>Forms</span>:""}</h4>
+                </div>
                 {
                   Roles.userIsInRole(this.props.userId, 'admin') ?
-                  (<div>
-                  <ButtonGroup justified className="StoreStudent">
-                    <DropdownButton className="dropdown-studentPrice"
+                  (<div className={this.state.formActive ? "display":"hide"}>
+                  <ButtonGroup justified className="dropdown">
+                    <DropdownButton
                       title={this.state.selectedOptionStudent}
                       id="document-type"
                       onSelect={this.handleSelectStudent.bind(this)}>
@@ -196,9 +202,8 @@ class StoreInput extends Component {
                        </MenuItem>))}
                     </DropdownButton>
                   </ButtonGroup>
-                  <p></p>
                   <form>
-                     <input className="input-studentPrice"
+                     <input className="form"
                        type="number"
                        min={0}
                        ref="studentPrice"
@@ -206,14 +211,11 @@ class StoreInput extends Component {
                        align="left"
                        />
                   </form>
-                  <Button bsStyle="warning" className="dropdown-submit-button" onClick={this.OnehandleSubmit.bind(this)}>Confirm & Submit</Button>
+                  <Button bsStyle="warning" className="form" onClick={this.OnehandleSubmit.bind(this)}>Confirm & Submit</Button>
                   </div>
                   ) : ""
                 }
-                </center>
-                <p></p>
               </div> : '' }
-            <p></p>
             <div className="DIV-studentPrice">
               {
                 this.renderStores()

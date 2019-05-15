@@ -224,15 +224,13 @@ class UserPage extends React.Component {
       <div>
         <center>
           <div className="table-user-first">
-            <Jumbotron>
-              <h3>Scores of all teams</h3>
-              <h4>You can find your team here</h4>
-              <Team />
-            </Jumbotron>
+          <div className="page-header clearfix">
+          <h4 className="pull-left">My Page <span className="headertext">{user.profile.name.first} {user.profile.name.last}</span></h4>
           </div>
-          <div className="table-user-second">
             <Jumbotron>
-              <h3>Your team composition</h3>
+              <div className="page-header clearfix">
+              <h4 className="pull-left">Players of my team</h4>
+              </div>
               <PublicTable />
             </Jumbotron>
           </div>

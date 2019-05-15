@@ -18,6 +18,7 @@ class MatchInput extends Component {
     super(props);
 
     this.state = {
+      formActive: false,
       hideCompleted: false,
       selectedOptionTeamOne: "Select team",
       selectedOptionTeamTwo: "Select team",
@@ -86,6 +87,12 @@ class MatchInput extends Component {
     });
   }
 
+  displayAdmin(){
+    this.setState({
+      formActive: !this.state.formActive,
+    });
+  }
+
   renderMatchs() {
     let filteredMatchs = this.props.matchs;
     if (this.state.hideCompleted) {
@@ -105,25 +112,6 @@ class MatchInput extends Component {
     });
   }
 
-  renderTeams() {
-    let filteredTeams = this.props.teams;
-    if (this.state.hideCompleted) {
-      filteredTeams = filteredTeams.filter(team => !Team.checked);
-    }
-    return filteredTeams.map((team) => {
-      const currentUserId = this.props.currentUser && this.props.currentUser._id;
-      const showPrivateButton = team.owner === currentUserId;
-
-      return (
-        <Team
-          key={team._id}
-          team={team}
-          showPrivateButton={showPrivateButton}
-        />
-      );
-    });
-  }
-
   handleChange = (selectedOption) => {
     this.setState({ selectedOption });
   }
@@ -137,112 +125,91 @@ class MatchInput extends Component {
         <Grid>
           <Row>
             <Col md={12}>
-              { this.props.currentUser ?
-              <div className="TeamAllForms">
-                <center>
-                  <h1>Add Match</h1>
-                    <div className="dropdown-round">
-                    <h4>Match Info</h4>
-                      <ButtonGroup justified className="MatchSeason">
-                        <DropdownButton className="SeasonSelect"
-                          title={this.state.selectedOptionSeason}
-                          id="document-type"
-                          onSelect={this.handleSelectSeason.bind(this)}>
-                            <MenuItem eventKey={'Fall Season'}>
-                              Fall Season
-                            </MenuItem>
-                            <MenuItem eventKey={'Winter Season'}>
-                              Winter Season
-                            </MenuItem>
-                            <MenuItem eventKey={'Spring Season'}>
-                              Spring Season
-                            </MenuItem>
-                        </DropdownButton>
-                      </ButtonGroup>
-                      <p></p>
-                      <ButtonGroup justified className="MatchRound">
-                        <DropdownButton className="dropdownbutton-team1"
-                          title={this.state.selectedOptionRound}
-                          id="document-type"
-                          onSelect={this.handleSelectRound.bind(this)}>
-                            <MenuItem eventKey={'First Match'}>
-                              First Match
-                            </MenuItem>
-                            <MenuItem eventKey={'Second Match'}>
-                              Second Match
-                            </MenuItem>
-                            <MenuItem eventKey={'Third Match'}>
-                              Third Match
-                            </MenuItem>
-                            <MenuItem eventKey={'Quarter-final'}>
-                              Quarter Final
-                            </MenuItem>
-                            <MenuItem eventKey={'Semi-final'}>
-                              Semi Final
-                            </MenuItem>
-                            <MenuItem eventKey={'Final Match'}>
-                              Final Match
-                            </MenuItem>
-                        </DropdownButton>
-                      </ButtonGroup>
-                      <p></p>
-                    </div>
-                    <div className="dropdown-team1">
-                      <h4>First Team</h4>
-                        <ButtonGroup justified className="MatchTeamDropdown">
-                          <DropdownButton className="dropdownbutton-team1"
-                            title={this.state.selectedOptionTeamOne}
-                            id="document-type"
-                            onSelect={this.handleSelectFirst.bind(this)}>
-                            {teams.map((team, i) => (
-                              <MenuItem key={i} eventKey={i}>
-                                {team}
-                              </MenuItem>))}
-                          </DropdownButton>
-                        </ButtonGroup>
-                        <p></p>
-                        <form>
-                          <input className="input-TeamOne"
-                            type="number"
-                            ref="ScoredOne"
-                            placeholder="First Teams Score"
-                            align="left"
-                          />
-                        </form>
-                    </div>
-
-                    <div className="dropdown-team2">
-                      <h4>Second Team</h4>
-                        <ButtonGroup justified className="MatchTeamDropdown">
-                          <DropdownButton className="dropdownbutton-team2"
-                            title={this.state.selectedOptionTeamTwo}
-                            id="document-type"
-                            onSelect={this.handleSelectSecond.bind(this)}>
-                            {teams.map((team, i) => (
-                              <MenuItem key={i} eventKey={i}>
-                                {team}
-                              </MenuItem>))}
-                          </DropdownButton>
-                        </ButtonGroup>
-                        <p></p>
-                        <form>
-                          <input className="input-TeamTwo"
-                            type="number"
-                            ref="ScoredTwo"
-                            placeholder= "Second Teams Score"
-                            align="right"
-                          />
-                        </form>
-                    </div>
-                    <p></p>
-                    <p></p>
-                    <Button bsStyle="warning" className="dropdown-submit-button" onClick={this.OnehandleSubmit.bind(this)}>Confirm & Submit</Button>
-                </center>
-                <p></p>
-              </div> : '' }
-
-            <p></p>
-            { this.props.currentUser ?
+              <div className="page-header clearfix">
+              <h4 className="pull-left">Matches {Roles.userIsInRole(this.props.userId, 'admin') ? <span className="headertext" onClick={this.displayAdmin.bind(this)}>Forms</span>:""}</h4>
+              </div>
+              <div className={this.state.formActive ? "display":"hide"}>
+                <ButtonGroup justified className="dropdown">
+                  <DropdownButton
+                    title={this.state.selectedOptionSeason}
+                    id="document-type"
+                    onSelect={this.handleSelectSeason.bind(this)}>
+                      <MenuItem eventKey={'Fall Season'}>
+                        Fall Season
+                      </MenuItem>
+                      <MenuItem eventKey={'Winter Season'}>
+                        Winter Season
+                      </MenuItem>
+                      <MenuItem eventKey={'Spring Season'}>
+                        Spring Season
+                      </MenuItem>
+                  </DropdownButton>
+                </ButtonGroup>
+                <ButtonGroup justified className="dropdown">
+                  <DropdownButton
+                    title={this.state.selectedOptionRound}
+                    id="document-type"
+                    onSelect={this.handleSelectRound.bind(this)}>
+                      <MenuItem eventKey={'First Match'}>
+                        First Match
+                      </MenuItem>
+                      <MenuItem eventKey={'Second Match'}>
+                        Second Match
+                      </MenuItem>
+                      <MenuItem eventKey={'Third Match'}>
+                        Third Match
+                      </MenuItem>
+                      <MenuItem eventKey={'Quarter-final'}>
+                        Quarter Final
+                      </MenuItem>
+                      <MenuItem eventKey={'Semi-final'}>
+                        Semi Final
+                      </MenuItem>
+                      <MenuItem eventKey={'Final Match'}>
+                        Final Match
+                      </MenuItem>
+                  </DropdownButton>
+                </ButtonGroup>
+                  <ButtonGroup justified className="dropdown">
+                    <DropdownButton
+                      title={this.state.selectedOptionTeamOne}
+                      id="document-type"
+                      onSelect={this.handleSelectFirst.bind(this)}>
+                      {teams.map((team, i) => (
+                        <MenuItem key={i} eventKey={i}>
+                          {team}
+                        </MenuItem>))}
+                    </DropdownButton>
+                  </ButtonGroup>
+                  <form>
+                    <input className="form"
+                      type="number"
+                      ref="ScoredOne"
+                      placeholder="First Teams Score"
+                      align="left"
+                    />
+                  </form>
+                  <ButtonGroup justified className="dropdown">
+                    <DropdownButton
+                      title={this.state.selectedOptionTeamTwo}
+                      id="document-type"
+                      onSelect={this.handleSelectSecond.bind(this)}>
+                      {teams.map((team, i) => (
+                        <MenuItem key={i} eventKey={i}>
+                          {team}
+                        </MenuItem>))}
+                    </DropdownButton>
+                  </ButtonGroup>
+                  <form>
+                    <input className="form"
+                      type="number"
+                      ref="ScoredTwo"
+                      placeholder= "Second Teams Score"
+                      align="right"
+                    />
+                  </form>
+                <Button bsStyle="warning" className="form" onClick={this.OnehandleSubmit.bind(this)}>Confirm & Submit</Button>
+              </div>
             <Table bordered condensed>
               <thead>
                 <tr>
@@ -256,13 +223,6 @@ class MatchInput extends Component {
                   {this.renderMatchs()}
               </tbody>
             </Table>
-              :
-              <span>
-              <center>
-              <h2 className="authText">Authorize to view this page</h2>
-              </center>
-              </span>
-            }
           </Col>
         </Row>
       </Grid>

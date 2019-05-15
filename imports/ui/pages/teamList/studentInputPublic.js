@@ -63,6 +63,9 @@ import Navigation from '../../components/Navigation/Navigation';
   render() {
     return (
       <div>
+        <div className="page-header clearfix">
+        <h4 className="pull-left">Player List</h4>
+        </div>
         <Table bordered condensed>
           <thead>
             <tr>

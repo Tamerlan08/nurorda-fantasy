@@ -1,5 +1,7 @@
 import React from 'react';
 import { Button, Carousel } from 'react-bootstrap';
+import { Meteor } from 'meteor/meteor';
+import { withTracker } from 'meteor/react-meteor-data';
 import styled from 'styled-components';
 import { LinkContainer } from 'react-router-bootstrap';
 import { lighten, darken } from 'polished';

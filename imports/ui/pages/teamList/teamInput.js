@@ -15,6 +15,7 @@ import Navigation from '../../components/Navigation/Navigation';
     super(props);
 
     this.state = {
+      formActive: false,
       hideCompleted: false,
     }
   };
@@ -47,6 +48,12 @@ import Navigation from '../../components/Navigation/Navigation';
     });
   }
 
+  displayAdmin(){
+    this.setState({
+      formActive: !this.state.formActive,
+    });
+  }
+
   renderTeams() {
     let filteredTeams = this.props.teams;
     if (this.state.hideCompleted) {
@@ -72,39 +79,31 @@ import Navigation from '../../components/Navigation/Navigation';
         <Grid>
           <Row>
             <Col md={12}>
-            { this.props.currentUser ?
             <div className="TeamAllForms">
-            <center>
-            <h1>Add Team</h1>
+            <div className="page-header clearfix">
+            <h4 className="pull-left">Team List {Roles.userIsInRole(this.props.userId, 'admin') ? <span className="headertext" onClick={this.displayAdmin.bind(this)}>Forms</span>:""}</h4>
+            </div>
+            <div className={this.state.formActive ? "display":"hide"}>
+              <form>
+                <input className="form"
+                  type="text"
+                  ref="TeamName"
+                  placeholder="Team Name"
+                  align="right"
+                />
+              </form>
 
-            <div className="TeamInfoForm">
-              <h4>Information about Team</h4>
-                <form className="TeamName" >
-                  <input className="input-TeamName"
-                    type="text"
-                    ref="TeamName"
-                    placeholder="Team Name"
-                    align="right"
-                  />
-                </form>
-
-                <form className="TeamLeader">
-                  <input className="input-TeamLeader"
-                    type="text"
-                    ref="TeamLeader"
-                    placeholder= "Team Leader"
-                    align="middle"
-                  />
-                </form>
-                <p></p>
-              </div>
-              <p></p>
-              <Button className="teamInput-submit-button" bsStyle="warning" name="Confirm" onClick={this.handleSubmit.bind(this)}>Confirm & Submit</Button>
-              </center>
-              <p></p>
-            </div> : '' }
-            <p></p>
-            { this.props.currentUser ?
+              <form>
+                <input className="form"
+                  type="text"
+                  ref="TeamLeader"
+                  placeholder= "Team Leader"
+                  align="middle"
+                />
+              </form>
+              <Button className="form" bsStyle="warning" name="Confirm" onClick={this.handleSubmit.bind(this)}>Confirm & Submit</Button>
+            </div>
+            </div>
             <Table bordered condensed>
               <thead>
                 <tr>
@@ -118,13 +117,6 @@ import Navigation from '../../components/Navigation/Navigation';
                   {this.renderTeams()}
               </tbody>
             </Table>
-              :
-              <span>
-              <center>
-              <h2 className="authText">Authorize to view this page</h2>
-              </center>
-              </span>
-            }
             </Col>
           </Row>
         </Grid>

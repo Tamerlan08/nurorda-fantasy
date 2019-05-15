@@ -11,11 +11,6 @@ body{
 h1, h2, h3, h4, h5, h6, p{
   color : black;
 }
-.dropdownbutton-team-rounds{
-  display: inline-block;
-}
-
-/* CSS added to studentInput page */
 .StudentGrid{
   display: grid;
   grid-template-columns: repeat(1, 100%);
@@ -23,50 +18,8 @@ h1, h2, h3, h4, h5, h6, p{
 .StudentTitle{
   width: 100%;
 }
-.StudentSurname{
-  width: 100%;
-}
-.StudentName{
-  width: 100%;
-}
-.StudentGrade{
-  width: 100%;
-}
-.StudentTeam{
-  width: 100%;
-}
-.StudentSubmit{
-  width: 100%;
-}
 .StudentTable{
   width: 100%;
-}
-.input-Surname {
-  width: 50%;
-  padding: 6px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
-}
-.input-Name {
-  width: 50%;
-  padding: 6px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
-}
-.input-Grade {
-  width: 50%;
-  padding: 6px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
-}
-.StudentTeamDropdown{
-  width: 50%;
-}
-.student-submit-button{
-  width: 50%;
 }
 .plus{
   width: 40%;
@@ -74,86 +27,34 @@ h1, h2, h3, h4, h5, h6, p{
 .minus{
   width: 40%;
 }
-
-
-/* CSS added to teamInput page */
-.TeamAllForms {
-
+.headertext{
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: bold;
+  font-size: 15px;
+  margin-left: 3px;
+  background: var(--gray-lighter);
+  color: var(--gray);
 }
-.input-TeamName {
-  width: 50%;
+.form {
+  width: 40%;
   padding: 6px;
   border: 1px solid #ccc;
   border-radius: 4px;
   resize: vertical;
 }
-.input-TeamLeader {
-  width: 50%;
-  padding: 6px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
+.dropdown{
+  width: 40%;
 }
-.teamInput-submit-button{
-  width: 50%;
+.hide{
+  display: none;
 }
-
-
-/* Every Table (without className) will be with centered text */
+.display{
+  display: block;
+}
 Table {
   text-align: center;
-}
-
-
-/* CSS added to Matches page */
-.dropdown-round {
-  float: left;
-  width: 100%;
-}
-.MatchSeason{
-  width: 30%;
-}
-.MatchRound{
-  width: 30%;
-}
-.MatchTeamDropdown{
-  width: 30%;
-}
-.dropdown-team1 {
-  width: 100%;
-}
-.dropdown-team2 {
-  width: 100%;
-}
-.input-TeamOne {
-    width: 30%;
-    padding: 6px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: vertical;
-}
-.input-TeamTwo {
-    width: 30%;
-    padding: 6px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    resize: vertical;
-}
-.dropdown-submit-button {
-  width: 60%;
-}
-
-
-/* CSS added to Store page */
-.StoreStudent {
-  width: 50%;
-}
-.input-studentPrice {
-  width: 50%;
-  padding: 6px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
 }
 .DIV-studentPrice {
   display: grid;
@@ -171,28 +72,6 @@ Table {
   width: 40%;
 }
 
-
-/* CSS added to Store page */
-.nextMatch-div{
-  border: double red;
-  background-color: #3399CC;
-  width: 100%;
-}
-.nextMatch-round{
-  font-size: 400%;
-  line-height: 70%;
-  color: #294D88;
-}
-.nextMatch-date{
-  font-size: 240%;
-  line-height: 70%;
-  color: #294D88;
-}
-.nextMatch-team{
-  font-size: 300%;
-  line-height: 70%;
-  color: #294D88;
-}
 
 
 .DeleteProfileButton {
@@ -264,10 +143,10 @@ Table {
   .MatchTeamDropdown{
     width: 80%;
   }
-  .input-TeamOne {
+  .input-TeamOne{
       width: 80%;
   }
-  .input-TeamTwo {
+  .input-TeamTwo{
       width: 80%;
   }
 }

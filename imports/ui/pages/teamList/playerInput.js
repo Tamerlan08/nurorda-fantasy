@@ -84,8 +84,10 @@ class PlayerInput extends Component {
 
     return (
       <div>
-        <center><h2>My Team</h2>
-        <h4>Balance available: <Badge>Not Available</Badge></h4></center>
+      <div className="page-header clearfix">
+      <h4 className="pull-left">My Team Players</h4>
+      <h4 className="pull-left"><span className="headertext">Balance: {this.props.user.defaultMoney}</span> <span className="headertext">Players: {this.props.user.players}</span></h4>
+      </div>
         <div className="DIV-studentPrice">
             {this.renderPlayers()}
         </div>
