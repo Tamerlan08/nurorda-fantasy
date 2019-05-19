@@ -9,9 +9,11 @@ import TeamInput from './teamInput.js'
 import { Teams } from '../../../api/teams.js';
 import Team from '../../components/Team/Team.js';
 import { Matchs } from '../../../api/matchs.js';
-import Match from './Match.js';
+import Match from '../../components/Match/Match.js';
 import Navigation from '../../components/Navigation/Navigation';
 import Select from 'react-select';
+import { Roles } from 'meteor/alanning:roles';
+import getUserProfile from '../../../modules/get-user-profile';
 
 class MatchInput extends Component {
   constructor(props) {
@@ -106,6 +108,7 @@ class MatchInput extends Component {
         <Match
           key={match._id}
           match={match}
+          userId={this.props.user._id}
           showPrivateButton={showPrivateButton}
         />
       );
@@ -216,7 +219,8 @@ class MatchInput extends Component {
                   <td><strong>Season</strong></td>
                   <td><strong>Match</strong></td>
                   <td><strong>team1/team2</strong></td>
-                  <td><strong> EDIT </strong></td>
+                  {Roles.userIsInRole(this.props.userId, 'admin') ?
+                  <td><strong> EDIT </strong></td>:""}
                 </tr>
               </thead>
               <tbody>
@@ -239,6 +243,7 @@ export default withTracker(() => {
   Meteor.subscribe('matchs');
   Meteor.subscribe('teams');
   return {
+    user: getUserProfile(Meteor.users.findOne({ _id: Meteor.userId() })),
     matchs: Matchs.find({}, { sort: { createdAt: -1 } }).fetch(),
     teams: Teams.find({}, { sort: { createdAt: -1 } }).fetch(),
     incompleteCount: Matchs.find({ checked: { $ne: false } }).count(),

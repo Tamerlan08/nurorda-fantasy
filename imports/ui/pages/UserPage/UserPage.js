@@ -17,8 +17,8 @@ import AccountPageFooter from '../../components/AccountPageFooter/AccountPageFoo
 import UserSettings from '../../components/UserSettings/UserSettings';
 import validate from '../../../modules/validate';
 import getUserProfile from '../../../modules/get-user-profile';
-import Team from '../teamList/teamInputPublic';
-import PublicTable from '../teamList/PlayerPublicTableInput.js';
+import Team from '../teamList/teamInput';
+import PlayerTable from '../teamList/PlayerTable.js';
 
 const StyledProfile = styled.div`
   .nav.nav-tabs {
@@ -228,10 +228,7 @@ class UserPage extends React.Component {
           <h4 className="pull-left">My Page <span className="headertext">{user.profile.name.first} {user.profile.name.last}</span></h4>
           </div>
             <Jumbotron>
-              <div className="page-header clearfix">
-              <h4 className="pull-left">Players of my team</h4>
-              </div>
-              <PublicTable />
+              <PlayerTable />
             </Jumbotron>
           </div>
         </center>

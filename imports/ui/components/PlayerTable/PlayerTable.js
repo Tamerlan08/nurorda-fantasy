@@ -5,7 +5,6 @@ import { Button, Table } from 'react-bootstrap';
 import { Roles } from 'meteor/alanning:roles';
 import PropTypes from 'prop-types';
 import { Bert } from 'meteor/themeteorchef:bert';
-
 import { Players } from '../../../api/players.js';
 class Player extends Component {
   constructor(props) {
@@ -30,20 +29,10 @@ class Player extends Component {
   render() {
       if (this.props.user._id == this.props.player.owner) {
         return (
-                <div className="studentPrice-2ndDIV">
-                  <center>
-                    <p>Players Name: <strong>{this.props.player.studentName}</strong></p>
-                    <p>Players Price: <strong>{this.props.player.studentPrice}M</strong></p>
-                    <p>
-                    <Button bsStyle="success" className="BuyButton" onClick={this.buyPlayer.bind(this)} disabled>
-                    Buy
-                    </Button>
-                    <Button bsStyle="danger" className="SellButton" onClick={this.sellPlayer.bind(this)}>
-                    Sell
-                    </Button>
-                    </p>
-                  </center>
-                </div>
+                <tr>
+                  <td>{this.props.player.studentName}</td>
+                  <td>{this.props.player.studentPrice}M</td>
+                </tr>
         );
       }
       else {

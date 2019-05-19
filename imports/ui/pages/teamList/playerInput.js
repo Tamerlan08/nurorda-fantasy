@@ -9,13 +9,11 @@ import Navigation from '../../components/Navigation/Navigation';
 import Select from 'react-select';
 import StudentInput from './studentInput.js'
 import { Students } from '../../../api/students.js';
-import Student from './Student.js';
 import { Players } from '../../../api/players.js';
-import Player from './Player.js';
+import Player from '../../components/Player/Player.js';
 import { Stores } from '../../../api/stores.js';
-import Store from './Store.js';
+import { Roles } from 'meteor/alanning:roles';
 import getUserProfile from '../../../modules/get-user-profile';
-
 
 class PlayerInput extends Component {
   constructor(props) {
@@ -88,9 +86,14 @@ class PlayerInput extends Component {
       <h4 className="pull-left">My Team Players</h4>
       <h4 className="pull-left"><span className="headertext">Balance: {this.props.user.defaultMoney}</span> <span className="headertext">Players: {this.props.user.players}</span></h4>
       </div>
+        {Roles.userIsInRole(this.props.user._id, 'admin') ?
+        <div>
+          <h3>Page is empty!</h3>
+          <h3>Admin accounts can not have thier own team.</h3>
+        </div>:
         <div className="DIV-studentPrice">
             {this.renderPlayers()}
-        </div>
+        </div>}
       </div>
     );
   }

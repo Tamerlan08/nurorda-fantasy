@@ -8,14 +8,12 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Navigation from '../../components/Navigation/Navigation';
 import Select from 'react-select';
 import { Students } from '../../../api/students.js';
-import Student from './Student.js';
 import { Stores } from '../../../api/stores.js';
-import Store from './Store.js';
 import PlayerInput from './playerInput.js';
 import StudentInput from './studentInput.js';
 import { Players } from '../../../api/players.js';
+import { Roles } from 'meteor/alanning:roles';
 import getUserProfile from '../../../modules/get-user-profile';
-
 
 class StoreInput extends Component {
   constructor(props) {

@@ -10,7 +10,9 @@ import { Players } from '../../../api/players.js';
 import { Teams } from '../../../api/teams.js';
 import TeamInput from './teamInput.js'
 import Team from '../../components/Team/Team.js';
-import Student from './Student.js';
+import Student from '../../components/Student/Student.js';
+import getUserProfile from '../../../modules/get-user-profile';
+import { Roles } from 'meteor/alanning:roles';
 import Navigation from '../../components/Navigation/Navigation';
 
  class Writing extends Component {
@@ -90,6 +92,7 @@ import Navigation from '../../components/Navigation/Navigation';
         <Student
           key={student._id}
           student={student}
+          userId={this.props.user._id}
           showPrivateButton={showPrivateButton}
         />
       );
@@ -159,7 +162,8 @@ import Navigation from '../../components/Navigation/Navigation';
                 <td><strong>Final Match</strong></td>
                 <td><strong>Average</strong></td>
                 <td><strong>Total Points</strong></td>
-                <td><strong> EDIT </strong></td>
+                {Roles.userIsInRole(this.props.userId, 'admin') ?
+                <td><strong> EDIT </strong></td>:""}
               </tr>
             </thead>
             <tbody>
@@ -177,6 +181,7 @@ export default withTracker(() => {
   Meteor.subscribe('players');
   Meteor.subscribe('teams');
   return {
+    user: getUserProfile(Meteor.users.findOne({ _id: Meteor.userId() })),
     students: Students.find({}, { sort: { average: -1 } }).fetch(),
     players: Players.find({}, { sort: { createdAt: -1 } }).fetch(),
     teams: Teams.find({}, { sort: { createdAt: -1 } }).fetch(),

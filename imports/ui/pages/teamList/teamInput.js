@@ -5,7 +5,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { Nav, Navbar, NavItem, NavDropdown, MenuItem, Table } from 'react-bootstrap';
 import { Button , Grid, Row, Col, Clearfix} from 'react-bootstrap';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
+import getUserProfile from '../../../modules/get-user-profile';
 import { Teams } from '../../../api/teams.js';
 import Team from '../../components/Team/Team.js';
 import Navigation from '../../components/Navigation/Navigation';
@@ -67,6 +67,7 @@ import Navigation from '../../components/Navigation/Navigation';
         <Team
           key={team._id}
           team={team}
+          userId={this.props.user._id}
           showPrivateButton={showPrivateButton}
         />
       );
@@ -110,7 +111,8 @@ import Navigation from '../../components/Navigation/Navigation';
                   <td><strong>Team Name</strong></td>
                   <td><strong>Team Leader</strong></td>
                   <td><strong>Team Score</strong></td>
-                  <td><strong> EDIT </strong></td>
+                  {Roles.userIsInRole(this.props.userId, 'admin') ?
+                  <td><strong> EDIT </strong></td>:""}
                 </tr>
               </thead>
               <tbody>
@@ -128,6 +130,7 @@ export default withTracker(() => {
   Meteor.subscribe('teams');
 
   return {
+    user: getUserProfile(Meteor.users.findOne({ _id: Meteor.userId() })),
     teams: Teams.find({}, {sort: {score: -1 }}).fetch(),
     incompleteCount: Teams.find({ checked: { $ne: false } }).count(),
     currentUser: Meteor.user(),

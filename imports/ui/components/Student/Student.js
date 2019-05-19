@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { Button, Table } from 'react-bootstrap';
 import { Students } from '../../../api/students.js';
 import { Bert } from 'meteor/themeteorchef:bert';
+import { Roles } from 'meteor/alanning:roles';
 // Student component - represents a single todo item
 export default class Student extends Component {
   deleteThisStudent() {
@@ -109,57 +110,69 @@ export default class Student extends Component {
               <td>{this.props.student.team}</td>
               <td>
                 <p className="title">{this.props.student.score}</p>
+                {Roles.userIsInRole(this.props.userId, 'admin') ?
                 <Button bsStyle="success" bsSize="xsmall" className="minus" onClick={this.TotaladdMinus.bind(this)}>
                 <span className="glyphicon glyphicon-minus"></span>
-                </Button>
+                </Button>:""}
+                {Roles.userIsInRole(this.props.userId, 'admin') ?
                 <Button bsStyle="success" bsSize="xsmall" className="plus" onClick={this.TotaladdPlus.bind(this)}>
                 <span className="glyphicon glyphicon-plus"></span>
-                </Button>
+                </Button>:""}
               </td>
               <td>
                 <p className="title">{this.props.student.scoreSecond}</p>
+                {Roles.userIsInRole(this.props.userId, 'admin') ?
                 <Button bsStyle="success" bsSize="xsmall" className="minus" onClick={this.TotalminusTwo.bind(this)}>
                 <span className="glyphicon glyphicon-minus"></span>
-                </Button>
+                </Button>:""}
+                {Roles.userIsInRole(this.props.userId, 'admin') ?
                 <Button bsStyle="success" bsSize="xsmall" className="plus" onClick={this.TotaladdTwo.bind(this)}>
                 <span className="glyphicon glyphicon-plus"></span>
-                </Button>
+                </Button>:""}
               </td>
               <td>
                 <p className="title">{this.props.student.scoreThird}</p>
+                {Roles.userIsInRole(this.props.userId, 'admin') ?
                 <Button bsStyle="success" bsSize="xsmall" className="minus" onClick={this.TotalminusThird.bind(this)}>
                 <span className="glyphicon glyphicon-minus"></span>
-                </Button>
+                </Button>:""}
+                {Roles.userIsInRole(this.props.userId, 'admin') ?
                 <Button bsStyle="success" bsSize="xsmall" className="plus" onClick={this.TotaladdThird.bind(this)}>
                 <span className="glyphicon glyphicon-plus"></span>
-                </Button>
+                </Button>:""}
               </td>
               <td>
                 <p className="title">{this.props.student.scoreFourth}</p>
+                {Roles.userIsInRole(this.props.userId, 'admin') ?
                 <Button bsStyle="success" bsSize="xsmall" className="minus" onClick={this.TotalminusFourth.bind(this)}>
                 <span className="glyphicon glyphicon-minus"></span>
-                </Button>
+                </Button>:""}
+                {Roles.userIsInRole(this.props.userId, 'admin') ?
                 <Button bsStyle="success" bsSize="xsmall" className="plus" onClick={this.TotaladdFourth.bind(this)}>
                 <span className="glyphicon glyphicon-plus"></span>
-                </Button>
+                </Button>:""}
               </td>
               <td>
                 <p className="title">{this.props.student.scoreFifth}</p>
+                {Roles.userIsInRole(this.props.userId, 'admin') ?
                 <Button bsStyle="success" bsSize="xsmall" className="minus" onClick={this.TotalminusFifth.bind(this)}>
                 <span className="glyphicon glyphicon-minus"></span>
-                </Button>
+                </Button>:""}
+                {Roles.userIsInRole(this.props.userId, 'admin') ?
                 <Button bsStyle="success" bsSize="xsmall" className="plus" onClick={this.TotaladdFifth.bind(this)}>
                 <span className="glyphicon glyphicon-plus"></span>
-                </Button>
+                </Button>:""}
               </td>
               <td>
                 <p className="title">{this.props.student.scoreSix}</p>
+                {Roles.userIsInRole(this.props.userId, 'admin') ?
                 <Button bsStyle="success" bsSize="xsmall" className="minus" onClick={this.TotalminusSix.bind(this)}>
                 <span className="glyphicon glyphicon-minus"></span>
-                </Button>
+                </Button>:""}
+                {Roles.userIsInRole(this.props.userId, 'admin') ?
                 <Button bsStyle="success" bsSize="xsmall" className="plus" onClick={this.TotaladdSix.bind(this)}>
                 <span className="glyphicon glyphicon-plus"></span>
-                </Button>
+                </Button>:""}
               </td>
               <td>
                {this.props.student.average}
@@ -167,11 +180,12 @@ export default class Student extends Component {
               <td>
                {this.props.student.totalScore}
               </td>
+              {Roles.userIsInRole(this.props.userId, 'admin') ?
               <td>
                 <Button bsStyle="danger" className="delete" onClick={this.deleteThisStudent.bind(this)}>
                   Delete
                 </Button>
-              </td>
+              </td>:""}
             </tr>
     );
   }

@@ -37,18 +37,21 @@ export default class Team extends Component {
               <td>{this.props.team.teamLeader}</td>
               <td>
               <p className="title">{this.props.team.score}</p>
+              {Roles.userIsInRole(this.props.userId, 'admin') ?
               <Button bsStyle="success" bsSize="xsmall" className="minus1" onClick={this.addMinus.bind(this)}>
               <span className="glyphicon glyphicon-minus"></span>
-              </Button>
+              </Button>:""}
+              {Roles.userIsInRole(this.props.userId, 'admin') ?
               <Button bsStyle="success" bsSize="xsmall" className="plus1" onClick={this.addPlus.bind(this)}>
               <span className="glyphicon glyphicon-plus"></span>
-              </Button>
+              </Button>:""}
               </td>
+              {Roles.userIsInRole(this.props.userId, 'admin') ?
               <td>
               <Button bsStyle="danger" className="delete" onClick={this.deleteThisTeam.bind(this)}>
                   &times;
               </Button>
-              </td>
+              </td>:""}
             </tr>
     );
   }
